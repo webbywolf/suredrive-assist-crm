@@ -41,7 +41,7 @@ export const navList = [
     submenu: [
       {
         id: 1,
-        name: "Add",
+        name: "Add New User",
         path: "/admin/add",
       },
       {

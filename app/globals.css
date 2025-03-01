@@ -3,11 +3,13 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  /* --color-brand: #ff1615; */
-  --color-brand: #00103f;
+  /* --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono); */
+  --font-inter: var(--font-inter);
+  --color-brand-primary: #ff1615;
+  --color-brand-secondary: #00103f;
   --color-border: #d4d4d8;
+  --color-dashboard: #f7f9f9;
 }
 
 :root {
@@ -146,5 +148,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .div-center {
+    @apply flex justify-center items-center;
   }
 }

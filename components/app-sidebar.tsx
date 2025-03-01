@@ -3,7 +3,6 @@
 import * as React from "react"
 import { ChevronDown, ChevronRight, Minus, Plus } from "lucide-react"
 
-import { VersionSwitcher } from "./version-switcher"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible"
 import {
   Sidebar,
@@ -140,7 +139,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarMenuButton
                       isActive={isActive(nav.path)}
                       className={cn("cursor-pointer", {
-                        "!bg-brand !text-white": isActive(nav.path),
+                        "!bg-brand-secondary !text-white": isActive(nav.path),
                       })}
                     >
                       {!nav.submenu ? (
