@@ -1,14 +1,7 @@
 "use client"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
-import {
-  ArrowRightToLine,
-  ChevronRight,
-  ActivitySquare,
-  LogOut,
-  Fan,
-  Settings,
-} from "lucide-react"
+import { ArrowRightToLine, ChevronRight, ActivitySquare, LogOut, Fan, Settings } from "lucide-react"
 import {
   Accordion,
   AccordionContent,

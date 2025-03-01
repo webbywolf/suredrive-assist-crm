@@ -1,13 +1,18 @@
-import React from "react";
-import Sidebar from "@/components/Sidebar";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "../ui/sidebar"
+import { AppSidebar } from "../app-sidebar"
+import Topbar from "./topbar"
 
-const Dashboard = ({ children }: { children: React.ReactNode }) => {
+export default function Dashboard({ children }: { children: React.ReactNode }) {
   return (
-    <main className="grid grid-cols-[240px_1fr] w-full h-screen">
-      <Sidebar />
-      <section className="bg-gray-50">{children}</section>
-    </main>
-  );
-};
-
-export default Dashboard;
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <header className="bg-background sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b px-4">
+          <SidebarTrigger className="-ml-1" />
+          <Topbar />
+        </header>
+        <div className="">{children}</div>
+      </SidebarInset>
+    </SidebarProvider>
+  )
+}

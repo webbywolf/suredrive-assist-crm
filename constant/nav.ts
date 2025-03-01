@@ -24,7 +24,7 @@ import {
   IdCard,
   NotebookTabs,
   Settings,
-} from "lucide-react";
+} from "lucide-react"
 
 export const navList = [
   {
@@ -41,12 +41,12 @@ export const navList = [
     submenu: [
       {
         id: 1,
-        name: "add",
+        name: "Add",
         path: "/admin/add",
       },
       {
         id: 2,
-        name: "all users",
+        name: "All Users",
         path: "/admin/alluser",
       },
     ],
@@ -92,4 +92,4 @@ export const navList = [
     icon: Settings,
     path: "/permissions",
   },
-];
+]
