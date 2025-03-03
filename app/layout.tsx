@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono, Inter } from "next/font/google"
 import "./globals.css"
-import Dashboard from "@/components/layouts/dashboard"
+import Dashboard from "@/components/layouts/Dashboard"
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable}  antialiased`} suppressHydrationWarning={true}>
+      <body className={`${inter.className}  antialiased`} suppressHydrationWarning={true}>
         <Dashboard>{children}</Dashboard>
       </body>
     </html>

@@ -21,10 +21,10 @@ import {
 import type { StepComponentProps } from "@/components/multi-step-form/types"
 
 const governmentDetailsSchema = z.object({
-  //   idType: z.string({ required_error: "Please select an ID type." }),
-  //   idNumber: z.string().min(5, { message: "ID number must be at least 5 characters." }),
-  //   taxId: z.string().min(5, { message: "Tax ID must be at least 5 characters." }),
-  //   nationality: z.string().min(2, { message: "Nationality must be at least 2 characters." }),
+  idType: z.string({ required_error: "Please select an ID type." }),
+  idNumber: z.string().min(5, { message: "ID number must be at least 5 characters." }),
+  taxId: z.string().min(5, { message: "Tax ID must be at least 5 characters." }),
+  nationality: z.string().min(2, { message: "Nationality must be at least 2 characters." }),
 })
 
 export type GovernmentDetailsSchema = z.infer<typeof governmentDetailsSchema>

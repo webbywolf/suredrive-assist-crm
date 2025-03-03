@@ -9,7 +9,6 @@ import { personalInfoFormSchema, PersonalInformationForm } from "./personal-info
 import { GovernmentDetailsForm, governmentDetailsFormSchema } from "./government-details-form"
 import { CredentialsForm, credentialsFormSchema } from "./credential-form"
 
-// Combine all schemas into one
 const formSchema = z.object({
   ...personalInfoFormSchema.shape,
   ...governmentDetailsFormSchema.shape,
@@ -42,7 +41,6 @@ export default function AddNewUser() {
 
   const handleComplete = async (data: z.infer<typeof formSchema>) => {
     console.log("Form submitted with data:", data)
-    // Here you would typically send the data to your API
     alert("Form submitted successfully!")
   }
 

@@ -15,7 +15,7 @@ import { navList } from "@/constant/nav"
 const Sidebar = () => {
   const isCollapsed = false
   return (
-    <aside className="w-full h-full flex flex-col border-r border-gray-200 px-2">
+    <aside className="w-[250px] h-full flex flex-col border-r border-gray-200 px-2 sticky top-0 left-0">
       {/* Header */}
       <SidebarHeader />
       {/* Navigation */}
@@ -109,8 +109,11 @@ const SidebarContent = () => {
               <AccordionTrigger
                 className={cn(`px-4 py-3 capitalize font-medium cursor-pointer`, {
                   "px-2 py-3 gap-0 justify-center hover:text-gray-600": isCollapsed,
-                  "bg-brand text-white hover:bg-brand": isActive(nav.path),
-                  "hover:bg-gray-100 data-[state=open]:bg-gray-200 ": !isActive(nav.path),
+                  "bg-brand-secondary text-white hover:bg-gray-300 hover:text-black": isActive(
+                    nav.path
+                  ),
+                  "hover:bg-gray-100 data-[state=open]:bg-brand-secondary data-[state=open]:text-white ":
+                    !isActive(nav.path),
                   // "bg-brand hover:bg-brand hover:text-white text-white":
                   //   expand === nav.id && isCollapsed,
                 })}
@@ -141,6 +144,7 @@ const SidebarContent = () => {
                     className={cn(`rotate-0 transition duration-200`, {
                       "hidden invisible": isCollapsed,
                       "inline-block": !isCollapsed,
+
                       // "rotate-90": expand === nav.id,
                     })}
                   />
@@ -159,7 +163,7 @@ const SidebarContent = () => {
                         className={cn(
                           `pl-4 fill-gray-500 font-medium py-2 flex items-center gap-2 capitalize rounded-md transition-all`,
                           {
-                            " bg-brand text-white fill-white": pathname === sub.path,
+                            " bg-gray-300": pathname === sub.path,
                             "hover:bg-gray-100 ": pathname !== sub.path,
                           }
                         )}

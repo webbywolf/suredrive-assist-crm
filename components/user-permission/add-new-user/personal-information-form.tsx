@@ -23,16 +23,16 @@ import { DatePicker } from "@/components/ui/date-picker"
 import type { StepComponentProps } from "@/components/multi-step-form/types"
 
 const personalInfoSchema = z.object({
-  //   firstName: z.string().min(2, { message: "First name must be at least 2 characters." }),
-  //   lastName: z.string().min(2, { message: "Last name must be at least 2 characters." }),
-  //   dateOfBirth: z.date({ required_error: "Date of birth is required." }),
-  //   gender: z.string({ required_error: "Please select a gender." }),
-  //   contactNumber: z.string().min(10, { message: "Contact number must be at least 10 digits." }),
-  //   email: z.string().email({ message: "Please enter a valid email address." }),
-  //   address: z.string().min(5, { message: "Address must be at least 5 characters." }),
+  firstName: z.string().min(2, { message: "First name must be at least 2 characters." }),
+  lastName: z.string().min(2, { message: "Last name must be at least 2 characters." }),
+  dateOfBirth: z.date({ required_error: "Date of birth is required." }),
+  gender: z.string({ required_error: "Please select a gender." }),
+  contactNumber: z.string().min(10, { message: "Contact number must be at least 10 digits." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  address: z.string().min(5, { message: "Address must be at least 5 characters." }),
 })
 
-// export type PersonalInfoSchema = z.infer<typeof personalInfoSchema>
+export type PersonalInfoSchema = z.infer<typeof personalInfoSchema>
 export const personalInfoFormSchema = personalInfoSchema
 
 export function PersonalInformationForm({
@@ -43,11 +43,11 @@ export function PersonalInformationForm({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-semibold">Personal Information</h2>
+        <h2 className="text-xl font-medium lg:pb-2">Personal Information</h2>
       </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onNext)} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 space-y-3">
             <FormField
               control={form.control}
               name="firstName"
@@ -55,7 +55,7 @@ export function PersonalInformationForm({
                 <FormItem>
                   <FormLabel>First Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="abhi" {...field} />
+                    <Input placeholder="Abhi" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -68,7 +68,7 @@ export function PersonalInformationForm({
                 <FormItem>
                   <FormLabel>Last Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="sharma" {...field} />
+                    <Input placeholder="Sharma" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

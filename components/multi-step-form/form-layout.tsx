@@ -5,10 +5,9 @@ interface FormLayoutProps {
   children: ReactNode
   steps: { id: string; title: string; description?: string }[]
   currentStepIndex: number
-  userName?: string
 }
 
-export function FormLayout({ children, steps, currentStepIndex, userName }: FormLayoutProps) {
+export function FormLayout({ children, steps, currentStepIndex }: FormLayoutProps) {
   return (
     <div className=" overflow-hidden">
       <div className="flex flex-col sm:flex-row gap-2">

@@ -1,17 +1,15 @@
 import AddNewPartner from "@/components/partners/add-new-partner"
-import AddNewUser from "@/components/user-permission/add-new-user/AddNewUser"
-import ExistingUsers from "@/components/user-permission/view-existing-users"
+import ExistingPartners from "@/components/partners/view-existing-partners"
 import React from "react"
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const slug = (await params).slug
-  console.log(slug)
   if (slug === "add") {
-    // return <AddNewUser />
     return <AddNewPartner />
   }
-  if (slug === "alluser") {
+  if (slug === "all") {
     // return <AddNewUser />
-    return <ExistingUsers />
+    return <ExistingPartners />
   }
+  return <div className="h-[500px] w-full div-center">Relax!! I'm working on it.</div>
 }

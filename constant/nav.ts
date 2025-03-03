@@ -46,7 +46,7 @@ export const navList = [
       },
       {
         id: 2,
-        name: "All Users",
+        name: "View Existing Users",
         path: "/admin/alluser",
       },
     ],
@@ -60,13 +60,13 @@ export const navList = [
     submenu: [
       {
         id: 1,
-        name: "add",
-        path: "/partner/add",
+        name: "Add New Partner",
+        path: "/partners/add",
       },
       {
         id: 2,
-        name: "All",
-        path: "/student/all",
+        name: "View Existing",
+        path: "/partners/all",
       },
     ],
   },
@@ -77,12 +77,12 @@ export const navList = [
     path: "/book",
     submenu: [
       {
-        name: "add",
-        path: "/Service/add",
+        name: "Add New Service",
+        path: "/services/add",
       },
       {
         name: "All",
-        path: "/Service/all",
+        path: "/services/all",
       },
     ],
   },
