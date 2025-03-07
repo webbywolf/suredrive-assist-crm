@@ -29,13 +29,6 @@ export function ReviewForm({
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">Review Information</h2>
-        <p className="text-muted-foreground mt-1">
-          Please review all information before submitting onboarding details.
-        </p>
-      </div>
-
       <div className="space-y-8">
         {/* Personal Information Section */}
         <div className="space-y-3">

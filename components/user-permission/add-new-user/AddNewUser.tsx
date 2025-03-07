@@ -19,6 +19,7 @@ const steps = [
   {
     id: "personal-info",
     title: "Personal Information",
+    description: "Basic details and contact",
     schema: personalInfoFormSchema,
     component: PersonalInformationForm,
   },
@@ -45,19 +46,17 @@ export default function AddNewUser() {
   }
 
   return (
-    <div className="container lg:mx-auto">
-      <FormLayout steps={steps} currentStepIndex={currentStepIndex}>
-        <MultiStepForm
-          steps={steps}
-          onComplete={handleComplete}
-          defaultValues={{
-            // You can provide default values here
-            firstName: "",
-            lastName: "",
-            contactNumber: "+91 ",
-          }}
-        />
-      </FormLayout>
-    </div>
+    <FormLayout steps={steps} currentStepIndex={currentStepIndex}>
+      <MultiStepForm
+        steps={steps}
+        onComplete={handleComplete}
+        defaultValues={{
+          // You can provide default values here
+          firstName: "",
+          lastName: "",
+          contactNumber: "+91 ",
+        }}
+      />
+    </FormLayout>
   )
 }

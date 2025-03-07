@@ -8,10 +8,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { DatePicker } from "@/components/ui/date-picker";
 import type { StepComponentProps } from "@/components/multi-step-form/types";
 import type { legalDetailsSchema } from "./types";
+import { Input } from "../ui/my-custom";
 
 export function LegalDetailsForm({
   form,
@@ -21,161 +21,97 @@ export function LegalDetailsForm({
 }: StepComponentProps<typeof legalDetailsSchema>) {
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-xl font-medium lg:pb-2">
-          Legal / Identification Details
-        </h2>
-      </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onNext)} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="pan"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Pan Number</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Pan number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+            <Input
+              label="Pan Number"
+              placeholder="Enter Pan number"
+              {...form.register("pan")}
+              className={form.formState.errors.pan ? "border-red-500" : ""}
             />
-            <FormField
-              control={form.control}
-              name="aadhar"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Aadhaar Number</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Aadhaar number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+            <Input
+              label="Aadhaar Number"
+              placeholder="Enter Aadhaar number"
+              {...form.register("aadhar")}
+              className={form.formState.errors.aadhar ? "border-red-500" : ""}
             />
           </div>
           <div>
             <p className="text-lg pb-3 ">Bank Details </p>
             <div className="grid grid-cols-1 pb-4">
-              <FormField
-                control={form.control}
-                name="accountHolderName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Account Holder Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter Account Holder Name"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+              <Input
+                label="Account Holder Name"
+                placeholder="Enter Account Holder Name"
+                {...form.register("accountHolderName")}
+                className={
+                  form.formState.errors.accountHolderName
+                    ? "border-red-500"
+                    : ""
+                }
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="aadhar"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Account Number</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter Account number" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+              <Input
+                label="Account Number"
+                placeholder="Enter Account number"
+                {...form.register("accountNumber")}
+                className={
+                  form.formState.errors.accountNumber ? "border-red-500" : ""
+                }
               />
-              <FormField
-                control={form.control}
-                name="aadhar"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Bank Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter Bank Name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+              <Input
+                label="Bank Name"
+                placeholder="Enter Bank Name"
+                {...form.register("bankName")}
+                className={
+                  form.formState.errors.bankName ? "border-red-500" : ""
+                }
               />
-              <FormField
-                control={form.control}
-                name="aadhar"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>IFSC Code</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter IFSC Code" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+              <Input
+                label="IFSC Code"
+                placeholder="Enter IFSC Code"
+                {...form.register("ifscCode")}
+                className={
+                  form.formState.errors.ifscCode ? "border-red-500" : ""
+                }
               />
-              <FormField
-                control={form.control}
-                name="image"
-                render={({ field: { value, onChange, ...field } }) => (
-                  <FormItem className="cursor-pointer ">
-                    <FormLabel>Upload Cancelled Cheque</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="file"
-                        accept=".png,.jpg,.jpeg"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          onChange(file ? file.name : "");
-                        }}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+              <Input
+                label="Upload Cancelled Cheque"
+                type="file"
+                accept=".png,.jpg,.jpeg"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  form.setValue("cancelledCheque", file ? file.name : "");
+                }}
+                className={
+                  form.formState.errors.cancelledCheque ? "border-red-500" : ""
+                }
               />
             </div>
           </div>
           <div>
             <p className="text-lg pb-3 ">PF/ESI Details </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="aadhar"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>UAN Number</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter UAN number" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+              <Input
+                label="UAN Number"
+                placeholder="Enter UAN number"
+                {...form.register("uanNumber")}
+                className={
+                  form.formState.errors.uanNumber ? "border-red-500" : ""
+                }
               />
-
-              <FormField
-                control={form.control}
-                name="image"
-                render={({ field: { value, onChange, ...field } }) => (
-                  <FormItem className="cursor-pointer ">
-                    <FormLabel>Upload UAN Card</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="file"
-                        accept=".png,.jpg,.jpeg"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          onChange(file ? file.name : "");
-                        }}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+              <Input
+                label="Upload UAN Card"
+                type="file"
+                accept=".png,.jpg,.jpeg"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  form.setValue("uanCard", file ? file.name : "");
+                }}
+                className={
+                  form.formState.errors.uanCard ? "border-red-500" : ""
+                }
               />
             </div>
           </div>

@@ -1,23 +1,25 @@
-import React from "react";
-import Sidebar from "@/components/Sidebar";
-import Topbar from "./topbar";
-import { SidebarInset } from "../ui/sidebar";
+import React from "react"
+import Sidebar from "@/components/Sidebar"
+import Topbar from "./topbar"
+import { SidebarInset } from "../ui/sidebar"
+import { cn } from "@/lib/utils"
 
 const Dashboard = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="flex ">
+    <div className="w-full flex h-dvh overflow-hidden">
       <Sidebar />
-      <SidebarInset className="flex flex-col">
-        <header className="bg-background sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b px-4 z-50">
-          <Topbar />
-        </header>
+      <div
+        className={cn(`relative w-full h-dvh flex flex-col bg-gray-100 overflow-y-auto `)}
+        style={{ transition: "all 0.3s ease-in-out 0s" }}
+      >
+        <Topbar />
 
-        <div className="h-[calc(100vh-64px)] container mx-auto py-4 px-8 overflow-auto bg-dashboard">
+        <main className="h-[calc(100vh-64px)] container mx-auto py-4 px-8 overflow-auto">
           {children}
-        </div>
-      </SidebarInset>
-    </main>
-  );
-};
+        </main>
+      </div>
+    </div>
+  )
+}
 
-export default Dashboard;
+export default Dashboard

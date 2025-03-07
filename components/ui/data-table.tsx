@@ -154,7 +154,7 @@ export function CustomFilterHeader<TData>({
         <Button
           variant="outline"
           className="text-accent-foreground/80"
-          onClick={() => router.push("/admin/add")}
+          onClick={() => router.push("/users/add-new")}
         >
           Add New User <Plus />
         </Button>
