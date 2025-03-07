@@ -1,19 +1,20 @@
-"use client"
+"use client";
 
-import type { z } from "zod"
-import { MultiStepForm } from "@/components/multi-step-form/multi-step-form"
-import { FormLayout } from "@/components/multi-step-form/form-layout"
+import type { z } from "zod";
+import { MultiStepForm } from "@/components/multi-step-form/multi-step-form";
+import { FormLayout } from "@/components/multi-step-form/form-layout";
 
-import { useMultiStepFormStore } from "@/store/multiform"
+import { useMultiStepFormStore } from "@/store/multiform";
 import {
   legalDetailsSchema,
   onboardingSchema,
   personalInfoSchema,
   workExperienceSchema,
-} from "./types"
-import { PersonalInformationForm } from "./personal-information-form"
-import { LegalDetailsForm } from "./legal-details-form"
-import { WorkExperienceForm } from "./work-experience"
+} from "./types";
+import { PersonalInformationForm } from "./personal-information-form";
+import { LegalDetailsForm } from "./legal-details-form";
+import { WorkExperienceForm } from "./work-experience";
+import { ReviewForm } from "./review";
 
 const steps = [
   {
@@ -34,6 +35,12 @@ const steps = [
     schema: workExperienceSchema,
     component: WorkExperienceForm,
   },
+  {
+    id: "review",
+    title: "Review & Submit",
+    schema: onboardingSchema,
+    component: ReviewForm,
+  },
   //   {
   //     id: "bank-details",
   //     title: "Bank Account Details",
@@ -52,16 +59,16 @@ const steps = [
   //     schema: credentialsSchema,
   //     component: CredentialsForm,
   //   },
-]
+];
 
 export default function Onboarding() {
-  const { currentStepIndex } = useMultiStepFormStore()
+  const { currentStepIndex } = useMultiStepFormStore();
 
   const handleComplete = async (data: z.infer<typeof onboardingSchema>) => {
-    console.log("Form submitted with data:", data)
+    console.log("Form submitted with data:", data);
 
-    alert("Company registration submitted successfully!")
-  }
+    alert("Company registration submitted successfully!");
+  };
 
   return (
     <div className="container lg:mx-auto">
@@ -75,5 +82,5 @@ export default function Onboarding() {
         />
       </FormLayout>
     </div>
-  )
+  );
 }

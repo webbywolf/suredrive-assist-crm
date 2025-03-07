@@ -1,7 +1,7 @@
-import React from "react"
-import Sidebar from "@/components/Sidebar"
-import Topbar from "./topbar"
-import { SidebarInset } from "../ui/sidebar"
+import React from "react";
+import Sidebar from "@/components/Sidebar";
+import Topbar from "./topbar";
+import { SidebarInset } from "../ui/sidebar";
 
 const Dashboard = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -12,10 +12,12 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
           <Topbar />
         </header>
 
-        <div className="flex-1 p-4  bg-dashboard">{children}</div>
+        <div className="h-[calc(100vh-64px)] container mx-auto py-4 px-8 overflow-auto bg-dashboard">
+          {children}
+        </div>
       </SidebarInset>
     </main>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,19 +10,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { DatePicker } from "@/components/ui/date-picker"
-import type { StepComponentProps } from "@/components/multi-step-form/types"
-import type { personalInfoSchema } from "./types"
+} from "@/components/ui/select";
+import { DatePicker } from "@/components/ui/date-picker";
+import type { StepComponentProps } from "@/components/multi-step-form/types";
+import type { personalInfoSchema } from "./types";
 
 export function PersonalInformationForm({
   form,
@@ -75,8 +75,8 @@ export function PersonalInformationForm({
                     type="file"
                     accept=".png,.jpg,.jpeg"
                     onChange={(e) => {
-                      const file = e.target.files?.[0]
-                      onChange(file ? file.name : "")
+                      const file = e.target.files?.[0];
+                      onChange(file ? file.name : "");
                     }}
                     {...field}
                   />
@@ -109,7 +109,10 @@ export function PersonalInformationForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Gender</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger className="cursor-pointer">
                         <SelectValue placeholder="Select a Gender" />
@@ -119,7 +122,6 @@ export function PersonalInformationForm({
                       <SelectItem value="male">Male</SelectItem>
                       <SelectItem value="female">Female</SelectItem>
                       <SelectItem value="other">Other</SelectItem>
-                      <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -223,5 +225,5 @@ export function PersonalInformationForm({
         </form>
       </Form>
     </div>
-  )
+  );
 }

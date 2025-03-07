@@ -27,7 +27,7 @@ export function WorkExperienceForm({
   onPrevious,
   isLastStep,
 }: StepComponentProps<typeof workExperienceSchema>) {
-  const isExperienced = form.watch("experience")
+  const isExperienced = Number(form.watch("experience")) === 2
   return (
     <div className="space-y-6">
       <div>
@@ -123,52 +123,59 @@ export function WorkExperienceForm({
               />
             )}
           </div>
-          <div>
-            <p className="text-lg pb-3 ">Previous Experience </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="noticePeriod"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Notice Period (Days)</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter Notice Period" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="role"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Role / Designation</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter Role / Designation Name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          {!!isExperienced && (
+            <div>
+              <div>
+                <p className="text-lg pb-3 ">Previous Experience </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="noticePeriod"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Notice Period (Days)</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter Notice Period" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="role"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Role / Designation</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter Role / Designation Name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 pt-4 ">
+                <FormField
+                  control={form.control}
+                  name="role"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Experience Summary</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Enter Experience Summary , Relavant Skills"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
-          </div>
-          <div className="grid grid-cols-1 ">
-            <FormField
-              control={form.control}
-              name="role"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Experience Summary</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder="Enter Experience Summary , Relavant Skills" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+          )}
           <div>
             <p className="text-lg pb-3 ">Reference </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -1,6 +1,7 @@
 export type Users = {
-  name: string
-  email: string
-  role: "Admin" | "Operations" | "Sales"
-  created_at: string
-}
+  employee_id: string;
+  name: string;
+  status: "Pending" | "Active" | "Rejected";
+  role: string;
+  created_on: string;
+};

@@ -24,7 +24,7 @@ import {
   IdCard,
   NotebookTabs,
   Settings,
-} from "lucide-react"
+} from "lucide-react";
 
 export const navList = [
   {
@@ -37,21 +37,44 @@ export const navList = [
     id: 2,
     name: "User & Permission",
     icon: ShieldCheck,
+    path: "/admin/alluser",
+    // submenu: [
+    //   {
+    //     id: 1,
+    //     name: "Add New User",
+    //     path: "/admin/add",
+    //   },
+    //   {
+    //     id: 2,
+    //     name: "View Existing Users",
+    //     path: "/admin/alluser",
+    //   },
+    // ],
+  },
+
+  {
+    id: 7,
+    name: "Pending Approvals",
+    icon: ShieldCheck,
     path: "/admin",
     submenu: [
       {
         id: 1,
-        name: "Add New User",
-        path: "/admin/add",
+        name: "User",
+        path: "/pending/users",
       },
       {
         id: 2,
-        name: "View Existing Users",
-        path: "/admin/alluser",
+        name: "Payments",
+        path: "/pending/payments",
+      },
+      {
+        id: 3,
+        name: "Service Escalation",
+        path: "/pending/services",
       },
     ],
   },
-
   {
     id: 3,
     name: "Partners",
@@ -92,4 +115,4 @@ export const navList = [
     icon: Settings,
     path: "/permissions",
   },
-]
+];

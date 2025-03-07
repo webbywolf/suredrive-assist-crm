@@ -1,18 +1,27 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
-import { Header, Users } from "./types"
-import { ArrowUpDown, Delete, Edit, EllipsisVertical, Pencil, Trash2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { ColumnDef } from "@tanstack/react-table";
+import { Header, Users } from "./types";
+import {
+  ArrowUpDown,
+  Delete,
+  Edit,
+  EllipsisVertical,
+  Pencil,
+  Trash2,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Chip } from "@/components/ui/chip";
 
-export const columns: ColumnDef<Header>[] = [
+export const columns: ColumnDef<Users>[] = [
   {
     id: "select",
     header: ({ table }) => (
       <Checkbox
         checked={
-          table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -29,39 +38,56 @@ export const columns: ColumnDef<Header>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: "employee_id",
+    header: "Employee ID",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("employee_id")}</div>
+    ),
+  },
+  {
     accessorKey: "name",
     header: "NAME",
     cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
   },
-  {
-    accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          className="uppercase"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
-  },
+  // {
+  //   accessorKey: "email",
+  //   header: ({ column }) => {
+  //     return (
+  //       <Button
+  //         variant="ghost"
+  //         className="uppercase"
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+  //       >
+  //         Email
+  //         <ArrowUpDown />
+  //       </Button>
+  //     );
+  //   },
+  //   cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+  // },
   {
     accessorKey: "role",
     header: () => <div className=" uppercase">Role</div>,
+    cell: ({ row }) => <p className="">{row.getValue("role")}</p>,
+  },
+  {
+    accessorKey: "status",
+    header: () => <div className=" uppercase">Status</div>,
     cell: ({ row }) => (
-      <div className="capitalize border border-gray-300 bg-white rounded-full w-fit px-1 py-0.5 text-sm ">
-        {row.getValue("role")}
-      </div>
+      <Chip
+        className="w-20 items-center"
+        variant={row.getValue("status").toLowerCase()}
+      >
+        {row.getValue("status")}
+      </Chip>
     ),
   },
   {
-    accessorKey: "created_at",
-    header: () => <div className="text-center uppercase">Created At</div>,
-    cell: ({ row }) => <div className="capitalize text-center">{row.getValue("created_at")}</div>,
+    accessorKey: "created_on",
+    header: () => <div className="text-center uppercase">Created On</div>,
+    cell: ({ row }) => (
+      <div className="capitalize text-center">{row.getValue("created_on")}</div>
+    ),
   },
   {
     id: "actions",
@@ -81,7 +107,7 @@ export const columns: ColumnDef<Header>[] = [
             <EllipsisVertical size={20} />
           </button>
         </div>
-      )
+      );
     },
   },
-]
+];

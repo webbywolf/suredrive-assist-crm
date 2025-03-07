@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   ColumnDef,
@@ -12,7 +12,7 @@ import {
   Table as TanTable,
   useReactTable,
   VisibilityState,
-} from "@tanstack/react-table"
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -21,21 +21,22 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import React from "react"
-import { Input } from "./input"
-import { cn } from "@/lib/utils"
-import { Popover, PopoverContent, PopoverTrigger } from "./popover"
-import { Button } from "./button"
-import { Label } from "./label"
-import { Filter } from "lucide-react"
-import { DataTablePagination } from "./table-pagination"
+} from "@/components/ui/table";
+import React from "react";
+import { Input } from "./input";
+import { cn } from "@/lib/utils";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { Button } from "./button";
+import { Label } from "./label";
+import { Filter, Plus } from "lucide-react";
+import { DataTablePagination } from "./table-pagination";
+import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
-  tablePagination?: boolean
-  filterBy?: string | undefined
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+  tablePagination?: boolean;
+  filterBy?: string | undefined;
 }
 
 export function DataTable<TData, TValue>({
@@ -44,10 +45,13 @@ export function DataTable<TData, TValue>({
   tablePagination = true,
   filterBy,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    [],
+  );
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
     data,
@@ -71,7 +75,7 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
   return (
     <div className="rounded-md">
@@ -85,9 +89,12 @@ export function DataTable<TData, TValue>({
                   <TableHead key={header.id} className="text-primary">
                     {header.isPlaceholder
                       ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
                   </TableHead>
-                )
+                );
               })}
             </TableRow>
           ))}
@@ -95,7 +102,11 @@ export function DataTable<TData, TValue>({
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} data-state={row.getIsSelected() && "selected"} className="">
+              <TableRow
+                key={row.id}
+                data-state={row.getIsSelected() && "selected"}
+                className=""
+              >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -114,13 +125,13 @@ export function DataTable<TData, TValue>({
       </Table>
       {tablePagination && <DataTablePagination table={table} />}
     </div>
-  )
+  );
 }
 
 interface CustomFilterHeaderProps<TData> {
-  table: TanTable<TData>
-  className?: string
-  filterBy?: string | undefined
+  table: TanTable<TData>;
+  className?: string;
+  filterBy?: string | undefined;
 }
 
 export function CustomFilterHeader<TData>({
@@ -128,16 +139,31 @@ export function CustomFilterHeader<TData>({
   className,
   filterBy = "email",
 }: CustomFilterHeaderProps<TData>) {
+  const router = useRouter();
   return (
-    <div className={cn("flex justify-between items-center w-full pr-8 pb-4", className)}>
+    <div
+      className={cn(
+        "flex justify-between items-center w-full pr-8 pb-4",
+        className,
+      )}
+    >
       <div>
         <p className="">Total: {table.getRowModel().rows.length}</p>
       </div>
       <div className="flex gap-6">
+        <Button
+          variant="outline"
+          className="text-accent-foreground/80"
+          onClick={() => router.push("/admin/add")}
+        >
+          Add New User <Plus />
+        </Button>
         <Input
-          placeholder="Filter emails..."
+          placeholder={`Filter by ${filterBy}`}
           value={(table.getColumn(filterBy)?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn(filterBy)?.setFilterValue(event.target.value)}
+          onChange={(event) =>
+            table.getColumn(filterBy)?.setFilterValue(event.target.value)
+          }
           className="max-w-sm rounded-sm"
         />
 
@@ -151,24 +177,42 @@ export function CustomFilterHeader<TData>({
             <div className="grid gap-4">
               <div className="space-y-2">
                 <h4 className="font-medium leading-none">Dimensions</h4>
-                <p className="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+                <p className="text-sm text-muted-foreground">
+                  Set the dimensions for the layer.
+                </p>
               </div>
               <div className="grid gap-2">
                 <div className="grid grid-cols-3 items-center gap-4">
                   <Label htmlFor="width">Width</Label>
-                  <Input id="width" defaultValue="100%" className="col-span-2 h-8" />
+                  <Input
+                    id="width"
+                    defaultValue="100%"
+                    className="col-span-2 h-8"
+                  />
                 </div>
                 <div className="grid grid-cols-3 items-center gap-4">
                   <Label htmlFor="maxWidth">Max. width</Label>
-                  <Input id="maxWidth" defaultValue="300px" className="col-span-2 h-8" />
+                  <Input
+                    id="maxWidth"
+                    defaultValue="300px"
+                    className="col-span-2 h-8"
+                  />
                 </div>
                 <div className="grid grid-cols-3 items-center gap-4">
                   <Label htmlFor="height">Height</Label>
-                  <Input id="height" defaultValue="25px" className="col-span-2 h-8" />
+                  <Input
+                    id="height"
+                    defaultValue="25px"
+                    className="col-span-2 h-8"
+                  />
                 </div>
                 <div className="grid grid-cols-3 items-center gap-4">
                   <Label htmlFor="maxHeight">Max. height</Label>
-                  <Input id="maxHeight" defaultValue="none" className="col-span-2 h-8" />
+                  <Input
+                    id="maxHeight"
+                    defaultValue="none"
+                    className="col-span-2 h-8"
+                  />
                 </div>
               </div>
             </div>
@@ -176,5 +220,5 @@ export function CustomFilterHeader<TData>({
         </Popover>
       </div>
     </div>
-  )
+  );
 }

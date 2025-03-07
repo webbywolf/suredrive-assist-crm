@@ -1,5 +1,5 @@
-"use client"
-import { Button } from "@/components/ui/button"
+"use client";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -7,11 +7,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { DatePicker } from "@/components/ui/date-picker"
-import type { StepComponentProps } from "@/components/multi-step-form/types"
-import type { legalDetailsSchema } from "./types"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { DatePicker } from "@/components/ui/date-picker";
+import type { StepComponentProps } from "@/components/multi-step-form/types";
+import type { legalDetailsSchema } from "./types";
 
 export function LegalDetailsForm({
   form,
@@ -22,7 +22,9 @@ export function LegalDetailsForm({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-medium lg:pb-2">Legal / Identification Details</h2>
+        <h2 className="text-xl font-medium lg:pb-2">
+          Legal / Identification Details
+        </h2>
       </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onNext)} className="space-y-4">
@@ -56,6 +58,24 @@ export function LegalDetailsForm({
           </div>
           <div>
             <p className="text-lg pb-3 ">Bank Details </p>
+            <div className="grid grid-cols-1 pb-4">
+              <FormField
+                control={form.control}
+                name="accountHolderName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Account Holder Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter Account Holder Name"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -107,8 +127,8 @@ export function LegalDetailsForm({
                         type="file"
                         accept=".png,.jpg,.jpeg"
                         onChange={(e) => {
-                          const file = e.target.files?.[0]
-                          onChange(file ? file.name : "")
+                          const file = e.target.files?.[0];
+                          onChange(file ? file.name : "");
                         }}
                         {...field}
                       />
@@ -147,8 +167,8 @@ export function LegalDetailsForm({
                         type="file"
                         accept=".png,.jpg,.jpeg"
                         onChange={(e) => {
-                          const file = e.target.files?.[0]
-                          onChange(file ? file.name : "")
+                          const file = e.target.files?.[0];
+                          onChange(file ? file.name : "");
                         }}
                         {...field}
                       />
@@ -171,5 +191,5 @@ export function LegalDetailsForm({
         </form>
       </Form>
     </div>
-  )
+  );
 }
