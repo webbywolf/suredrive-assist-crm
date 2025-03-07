@@ -1,4 +1,3 @@
-import { DataTableDemo } from "@/components/table"
 import { DataTable } from "@/components/ui/data-table"
 import React from "react"
 import { columns } from "./columns"
@@ -79,7 +78,7 @@ const tableData: Partners[] = [
 export default function ExistingPartners() {
   return (
     <div>
-      <DataTable data={tableData} columns={columns} />
+      <DataTable data={tableData} columns={columns} filterBy="contactPerson" />
     </div>
   )
 }

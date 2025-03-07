@@ -1,4 +1,5 @@
 import { AddNewService } from "@/components/services/add-new-service"
+import ExistingServices from "@/components/services/view-existing-services"
 import React from "react"
 
 export default async function Page({ params }: { params: { slug: string } }) {
@@ -6,6 +7,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
   console.log(slug)
   if (slug === "add") {
     return <AddNewService />
+  }
+  if (slug === "all") {
+    return <ExistingServices />
   }
   return <div className="h-[500px] w-full div-center">Relax!! I'm working on it.</div>
 }

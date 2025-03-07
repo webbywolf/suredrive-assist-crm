@@ -35,12 +35,14 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   tablePagination?: boolean
+  filterBy?: string | undefined
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   tablePagination = true,
+  filterBy,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -73,7 +75,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md">
-      <CustomFilterHeader table={table} />
+      <CustomFilterHeader table={table} filterBy={filterBy} />
       <Table>
         <TableHeader className="h-16">
           {table.getHeaderGroups().map((headerGroup) => (
@@ -118,9 +120,14 @@ export function DataTable<TData, TValue>({
 interface CustomFilterHeaderProps<TData> {
   table: TanTable<TData>
   className?: string
+  filterBy?: string | undefined
 }
 
-function CustomFilterHeader<TData>({ table, className }: CustomFilterHeaderProps<TData>) {
+export function CustomFilterHeader<TData>({
+  table,
+  className,
+  filterBy = "email",
+}: CustomFilterHeaderProps<TData>) {
   return (
     <div className={cn("flex justify-between items-center w-full pr-8 pb-4", className)}>
       <div>
@@ -129,8 +136,8 @@ function CustomFilterHeader<TData>({ table, className }: CustomFilterHeaderProps
       <div className="flex gap-6">
         <Input
           placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn("email")?.setFilterValue(event.target.value)}
+          value={(table.getColumn(filterBy)?.getFilterValue() as string) ?? ""}
+          onChange={(event) => table.getColumn(filterBy)?.setFilterValue(event.target.value)}
           className="max-w-sm rounded-sm"
         />
 

@@ -7,7 +7,7 @@ interface FormStepSidebarProps {
 
 export function FormStepSidebar({ steps, currentStepIndex }: FormStepSidebarProps) {
   return (
-    <div className="flex flex-row sm:flex-col gap-4 bg-brand-secondary text-white p-6 h-full max-h-[490px] sm:min-h-[calc(100vh-100px)] rounded-md overflow-x-scroll sm:overflow-x-hidden">
+    <div className="flex flex-row sm:flex-col gap-4 bg-brand-secondary text-white p-6 h-full max-h-[490px] sm:min-h-[calc(100vh-100px)] rounded-md sticky top-0 overflow-x-scroll sm:overflow-x-hidden">
       {steps.map((step, index) => (
         <div key={step.id} className="flex items-center gap-3">
           <div
