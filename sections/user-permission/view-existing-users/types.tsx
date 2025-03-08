@@ -3,5 +3,4 @@ export type Users = {
   name: string;
   status: "Pending" | "Active" | "Rejected";
   role: string;
-  created_on: string;
 };

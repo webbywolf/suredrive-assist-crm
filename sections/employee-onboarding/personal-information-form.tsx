@@ -102,7 +102,6 @@ export function PersonalInformationForm({
             type="file"
             accept=".png,.jpg,.jpeg"
             onChange={handleFileChange}
-            className={errors.image ? "border-red-500" : ""}
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
