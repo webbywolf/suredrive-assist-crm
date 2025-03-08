@@ -1,8 +1,7 @@
-import { DataTableDemo } from "@/components/table";
-import { DataTable } from "@/components/ui/data-table";
 import React from "react";
 import { Users } from "./types";
 import { columns } from "./columns";
+import { DataTable } from "@/components/table/DataTable";
 
 const data: Users[] = [
   {
@@ -79,8 +78,12 @@ const data: Users[] = [
 
 export default function ExistingUsers() {
   return (
-    <div>
-      <DataTable data={data} columns={columns} filterBy="employee_id" />
-    </div>
+    <DataTable
+      columns={columns}
+      data={data}
+      filterOptions={{ label: "Employee ID", value: "id" }}
+      addButton={{ label: "Add New", location: "/users/add-new" }}
+      paginationOption
+    />
   );
 }

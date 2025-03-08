@@ -37,7 +37,7 @@ export function FormLayout({
         <div className="flex-1 p-6 bg-[#fafafa] overflow-auto">{children}</div>
         <div className="h-[70px] px-6 flex gap-3 bg-white items-center border-t border-border py-2">
           {isLastStep ? (
-            <Button type="submit" variant="brand" onClick={() => onSubmit}>
+            <Button type="submit" variant="brand" onClick={onSubmit}>
               Submit
             </Button>
           ) : (
@@ -48,7 +48,7 @@ export function FormLayout({
           {!isFirstStep && (
             <Button
               type="button"
-              className="bg-gray-300 text-black hover:text-white"
+              variant="outline"
               onClick={previousStep} // Call onPrevious
             >
               Previous

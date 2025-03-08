@@ -8,12 +8,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/my-custom";
 import { DatePicker } from "@/components/ui/date-picker";
 import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { workExperienceSchema } from "./types";
-import { Checkbox } from "../ui/checkbox";
-import { Textarea } from "../ui/textarea";
+import type { workExperienceSchema } from "@/types/onboarding.types";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
 
 const experience = [
   { id: 1, label: "Fresher" },

@@ -1,15 +1,19 @@
-import { AddNewService } from "@/components/services/add-new-service"
-import ExistingServices from "@/components/services/view-existing-services"
-import React from "react"
+import { AddNewService } from "@/sections/services/add-new-service";
+import ExistingServices from "@/sections/services/view-existing-services";
+import React from "react";
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const slug = (await params).slug
-  console.log(slug)
+  const slug = (await params).slug;
+  console.log(slug);
   if (slug === "add") {
-    return <AddNewService />
+    return <AddNewService />;
   }
   if (slug === "all") {
-    return <ExistingServices />
+    return <ExistingServices />;
   }
-  return <div className="h-[500px] w-full div-center">Relax!! I'm working on it.</div>
+  return (
+    <div className="h-[500px] w-full div-center">
+      Relax!! I'm working on it.
+    </div>
+  );
 }

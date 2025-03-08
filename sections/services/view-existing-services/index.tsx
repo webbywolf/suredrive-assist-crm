@@ -12,9 +12,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { CustomFilterHeader } from "@/components/ui/data-table"
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
-import { DataTablePagination } from "@/components/ui/table-pagination"
+import { DataTablePagination } from "@/components/table/Pagination"
 
 const tableData: Partners[] = [
   {
@@ -115,9 +114,10 @@ export default function ExistingServices() {
   })
   console.log(table.getRowModel().rows.map((row) => row.original))
   return (
-    <div>
-      <CustomFilterHeader table={table} filterBy="contactPerson" />
-      <Table>
+    <div className="div-center h-100">
+      <p>Working...</p>
+      {/* <CustomFilterHeader table={table} filterBy="contactPerson" /> */}
+      {/* <Table>
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
@@ -132,7 +132,7 @@ export default function ExistingServices() {
           )}
         </TableBody>
       </Table>
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} /> */}
     </div>
   )
 }

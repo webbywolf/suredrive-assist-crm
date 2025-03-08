@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -9,42 +9,28 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/my-custom";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { DatePicker } from "@/components/ui/date-picker"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { Checkbox } from "@/components/ui/checkbox"
-
-const formSchema = z.object({
-  //   serviceName: z.string().min(2, { message: "First name must be at least 2 characters." }),
-  //   serviceCategory: z.string().min(2, { message: "Last name must be at least 2 characters." }),
-  //   description: z.date({ required_error: "Date of birth is required." }),
-  //   price: z.string({ required_error: "Please select a gender." }),
-  //   duration: z.string().min(10, { message: "Contact number must be at least 10 digits." }),
-  //   coverage: z.array(z.string()).refine((value) => value.some((item) => item), {
-  //     message: "You have to select at least one item.",
-  //   }),
-  //   exclusion: z.array(z.string()).refine((value) => value.some((item) => item), {
-  //     message: "You have to select at least one item.",
-  //   }),
-  //   commission: z.string().min(5, { message: "Address must be at least 5 characters." }),
-})
+} from "@/components/ui/select";
+import { DatePicker } from "@/components/ui/date-picker";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Checkbox } from "@/components/ui/checkbox";
+import { formSchema } from "@/types/service.types";
 
 const services = [
   { index: 0, service_category: "Tire Repair" },
   { index: 1, service_category: "Brake Adjustment" },
   { index: 2, service_category: "Chain Maintenance" },
   { index: 3, service_category: "Gear System Tune-up" },
-]
+];
 
 const coverageItems = [
   {
@@ -67,23 +53,23 @@ const coverageItems = [
     id: 5,
     label: "Key Lockout",
   },
-]
+];
 
 const exclusion = [
   { id: 1, label: "Engine Failure due to Negligence" },
   { id: 2, label: "Theft" },
-]
+];
 
 export function AddNewService({}) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
-  })
+  });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    console.log(values);
   }
   return (
     <div className="space-y-6 lg:pl-16 pt-3 max-w-3xl">
@@ -112,7 +98,10 @@ export function AddNewService({}) {
               render={({ field }) => (
                 <FormItem className="w-1/2">
                   <FormLabel>Service Category</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger className="cursor-pointer">
                         <SelectValue placeholder="Select Category" />
@@ -120,7 +109,10 @@ export function AddNewService({}) {
                     </FormControl>
                     <SelectContent>
                       {services.map((service) => (
-                        <SelectItem key={service.index} value={String(service.index)}>
+                        <SelectItem
+                          key={service.index}
+                          value={String(service.index)}
+                        >
                           {service.service_category}
                         </SelectItem>
                       ))}
@@ -168,7 +160,10 @@ export function AddNewService({}) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Plan Duration</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger className="cursor-pointer">
                         <SelectValue placeholder="Set Validity " />
@@ -202,7 +197,10 @@ export function AddNewService({}) {
                         name="coverage"
                         render={({ field }) => {
                           return (
-                            <FormItem key={item.id} className="flex flex-row items-center">
+                            <FormItem
+                              key={item.id}
+                              className="flex flex-row items-center"
+                            >
                               <FormControl>
                                 <Checkbox
                                   className="border-gray-600"
@@ -216,9 +214,11 @@ export function AddNewService({}) {
                                   // }}
                                 />
                               </FormControl>
-                              <FormLabel className="!pb-0">{item.label}</FormLabel>
+                              <FormLabel className="!pb-0">
+                                {item.label}
+                              </FormLabel>
                             </FormItem>
-                          )
+                          );
                         }}
                       />
                     ))}
@@ -245,7 +245,10 @@ export function AddNewService({}) {
                         name="exclusion"
                         render={({ field }) => {
                           return (
-                            <FormItem key={item.id} className="flex flex-row items-center">
+                            <FormItem
+                              key={item.id}
+                              className="flex flex-row items-center"
+                            >
                               <FormControl>
                                 <Checkbox
                                   className="border-gray-600"
@@ -259,9 +262,11 @@ export function AddNewService({}) {
                                   // }}
                                 />
                               </FormControl>
-                              <FormLabel className="!pb-0">{item.label}</FormLabel>
+                              <FormLabel className="!pb-0">
+                                {item.label}
+                              </FormLabel>
                             </FormItem>
-                          )
+                          );
                         }}
                       />
                     ))}
@@ -278,7 +283,10 @@ export function AddNewService({}) {
             render={({ field }) => (
               <FormItem className="w-1/2">
                 <FormLabel>Commission Rate</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger className="cursor-pointer">
                       <SelectValue placeholder="Set Rate " />
@@ -304,5 +312,5 @@ export function AddNewService({}) {
         </form>
       </Form>
     </div>
-  )
+  );
 }

@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/form";
 import { DatePicker } from "@/components/ui/date-picker";
 import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { legalDetailsSchema } from "./types";
-import { Input } from "../ui/my-custom";
+import { Input } from "@/components/ui/my-custom";
+import { legalDetailsSchema } from "@/types/onboarding.types";
 
 export function LegalDetailsForm({
   form,
@@ -114,15 +114,6 @@ export function LegalDetailsForm({
                 }
               />
             </div>
-          </div>
-
-          <div className="flex justify-between pt-4">
-            <Button type="button" variant="outline" onClick={onPrevious}>
-              Previous
-            </Button>
-            <Button type="submit" variant="brand">
-              Next
-            </Button>
           </div>
         </form>
       </Form>

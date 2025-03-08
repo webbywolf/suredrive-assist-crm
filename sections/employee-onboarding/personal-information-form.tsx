@@ -13,8 +13,8 @@ import {
 } from "@/components/ui/select";
 import { DatePicker } from "@/components/ui/date-picker";
 import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { personalInfoSchema } from "./types";
-import { Input } from "../ui/my-custom";
+import type { personalInfoSchema } from "@/types/onboarding.types";
+import { Input } from "@/components/ui/my-custom";
 
 export function PersonalInformationForm({
   form,
@@ -55,14 +55,6 @@ export function PersonalInformationForm({
               className={errors.lastName ? "border-red-500" : ""}
             />
           </div>
-
-          <Input
-            label="Upload Image"
-            type="file"
-            accept=".png,.jpg,.jpeg"
-            onChange={handleFileChange}
-            className={errors.image ? "border-red-500" : ""}
-          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -105,6 +97,13 @@ export function PersonalInformationForm({
               )}
             </div>
           </div>
+          <Input
+            label="Upload Image"
+            type="file"
+            accept=".png,.jpg,.jpeg"
+            onChange={handleFileChange}
+            className={errors.image ? "border-red-500" : ""}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input

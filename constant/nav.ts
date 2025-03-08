@@ -37,19 +37,19 @@ export const navList = [
     id: 2,
     name: "User & Permission",
     icon: ShieldCheck,
-    path: "/admin/alluser",
-    // submenu: [
-    //   {
-    //     id: 1,
-    //     name: "Add New User",
-    //     path: "/admin/add",
-    //   },
-    //   {
-    //     id: 2,
-    //     name: "View Existing Users",
-    //     path: "/admin/alluser",
-    //   },
-    // ],
+    path: "/users",
+    submenu: [
+      {
+        id: 1,
+        name: "Add New User",
+        path: "/users/add-new",
+      },
+      {
+        id: 2,
+        name: "View Existing Users",
+        path: "/users",
+      },
+    ],
   },
 
   {

@@ -1,19 +1,26 @@
-"use client"
-import { useState } from "react"
-import { cn } from "@/lib/utils"
-import { ArrowRightToLine, ChevronRight, ActivitySquare, LogOut, Fan, Settings } from "lucide-react"
+"use client";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import {
+  ArrowRightToLine,
+  ChevronRight,
+  ActivitySquare,
+  LogOut,
+  Fan,
+  Settings,
+} from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
-import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
-import { navList } from "@/constant/nav"
+} from "@/components/ui/accordion";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { navList } from "@/constant/nav";
 
 const Sidebar = () => {
-  const isCollapsed = false
+  const isCollapsed = false;
   return (
     <aside className="w-[300px] h-full flex flex-col border-r border-gray-200 px-2 sticky top-0 left-0">
       {/* Header */}
@@ -35,20 +42,23 @@ const Sidebar = () => {
         </button>
       </div>
     </aside>
-  )
-}
+  );
+};
 
 const SidebarHeader = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const onCollapse = () => {
-    setIsCollapsed(!isCollapsed)
-  }
+    setIsCollapsed(!isCollapsed);
+  };
   return (
     <div
-      className={cn(`logo h-16 flex items-center overflow-hidden border-b border-gray-200`, {
-        // "justify-center": isCollapsed,
-        // "justify-between": !isCollapsed,
-      })}
+      className={cn(
+        `logo h-16 flex items-center overflow-hidden border-b border-gray-200`,
+        {
+          // "justify-center": isCollapsed,
+          // "justify-between": !isCollapsed,
+        },
+      )}
     >
       <img
         loading="lazy"
@@ -76,18 +86,18 @@ const SidebarHeader = () => {
         <ArrowRightToLine size={23} />
       </button> */}
     </div>
-  )
-}
+  );
+};
 
 const SidebarContent = () => {
-  const pathname = usePathname()
-  const router = useRouter()
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const pathname = usePathname();
+  const router = useRouter();
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const onCollapse = () => {
-    setIsCollapsed(!isCollapsed)
-  }
-  const expand = false
-  const isActive = (path: string) => pathname === path
+    setIsCollapsed(!isCollapsed);
+  };
+  const expand = false;
+  const isActive = (path: string) => pathname.includes(path);
 
   return (
     <div className="py-3 flex-1 overflow-auto">
@@ -107,19 +117,22 @@ const SidebarContent = () => {
               // onClick={() => handleItemClick(nav)}
             >
               <AccordionTrigger
-                className={cn(`px-2 py-3 capitalize font-normal cursor-pointer`, {
-                  "px-2 py-3 gap-0 justify-center hover:text-gray-600": isCollapsed,
-                  "bg-brand-secondary text-white hover:bg-gray-300 hover:text-black": isActive(
-                    nav.path
-                  ),
-                  "hover:bg-gray-100 data-[state=open]:bg-brand-secondary data-[state=open]:text-white ":
-                    !isActive(nav.path),
-                  // "bg-brand hover:bg-brand hover:text-white text-white":
-                  //   expand === nav.id && isCollapsed,
-                })}
+                className={cn(
+                  `px-2 py-3 capitalize font-normal cursor-pointer`,
+                  {
+                    "px-2 py-3 gap-0 justify-center hover:text-gray-600":
+                      isCollapsed,
+                    "bg-brand-secondary text-white hover:bg-brand-secondary hover:text-white":
+                      isActive(nav.path),
+                    "data-[state=open]:bg-brand-secondary/60 data-[state=open]:text-white hover:bg-brand-secondary/60 hover:text-white":
+                      !isActive(nav.path),
+                    // "bg-brand hover:bg-brand hover:text-white text-white":
+                    //   expand === nav.id && isCollapsed,
+                  },
+                )}
                 onClick={() => {
-                  if (nav.submenu) return
-                  router.push(nav.path)
+                  if (nav.submenu) return;
+                  router.push(nav.path);
                 }}
               >
                 <div
@@ -141,12 +154,15 @@ const SidebarContent = () => {
                 {nav.submenu && (
                   <ChevronRight
                     size={16}
-                    className={cn(`rotate-0 transition duration-200`, {
-                      "hidden invisible": isCollapsed,
-                      "inline-block": !isCollapsed,
+                    className={cn(
+                      `rotate-0 transition duration-200 data-[state=open]:rotate-60`,
+                      {
+                        "hidden invisible": isCollapsed,
+                        "inline-block": !isCollapsed,
 
-                      // "rotate-90": expand === nav.id,
-                    })}
+                        // "rotate-90": expand === nav.id,
+                      },
+                    )}
                   />
                 )}
               </AccordionTrigger>
@@ -165,7 +181,7 @@ const SidebarContent = () => {
                           {
                             " bg-gray-300": pathname === sub.path,
                             "hover:bg-gray-100 ": pathname !== sub.path,
-                          }
+                          },
                         )}
                         key={index}
                       >
@@ -179,16 +195,16 @@ const SidebarContent = () => {
                         </svg>
                         {sub.name}
                       </Link>
-                    )
+                    );
                   })}
                 </AccordionContent>
               )}
             </AccordionItem>
-          )
+          );
         })}
       </Accordion>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
