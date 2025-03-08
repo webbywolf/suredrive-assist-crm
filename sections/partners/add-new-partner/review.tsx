@@ -2,7 +2,7 @@ import type { z } from "zod";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { companyRegistrationSchema } from "@/types/partner.types";
+import type { companyRegistrationSchema } from "../../../types/types/partner.types";
 import { LabelAndValue } from "@/components/ui/my-custom";
 
 type FormData = z.infer<typeof companyRegistrationSchema>;

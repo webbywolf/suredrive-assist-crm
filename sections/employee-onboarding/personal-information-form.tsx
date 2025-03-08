@@ -58,13 +58,12 @@ export function PersonalInformationForm({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="text-[14px] capitalize font-medium text-gray-700 mb-[6px] block">
-                Date of Birth
-              </label>
               <DatePicker
-                date={watch("dateOfBirth")}
-                setDate={(date) => setValue("dateOfBirth", date)}
-                placeholder="Select Date"
+                name="start"
+                label="Date of Birth"
+                // @ts-ignore
+                value={form.start}
+                // onChange={handleStartDateChange}
               />
               {errors.dateOfBirth && (
                 <p className="text-sm text-red-500 mt-1">

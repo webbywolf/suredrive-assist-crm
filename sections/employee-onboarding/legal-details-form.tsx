@@ -8,7 +8,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { DatePicker } from "@/components/ui/date-picker";
 import type { StepComponentProps } from "@/components/multi-step-form/types";
 import { Input } from "@/components/ui/my-custom";
 import { legalDetailsSchema } from "@/types/onboarding.types";

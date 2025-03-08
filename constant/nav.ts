@@ -56,7 +56,7 @@ export const navList = [
     id: 7,
     name: "Pending Approvals",
     icon: ShieldCheck,
-    path: "/admin",
+    path: "/pending",
     submenu: [
       {
         id: 1,
@@ -79,7 +79,7 @@ export const navList = [
     id: 3,
     name: "Partners",
     icon: Handshake,
-    path: "/student",
+    path: "/partners",
     submenu: [
       {
         id: 1,

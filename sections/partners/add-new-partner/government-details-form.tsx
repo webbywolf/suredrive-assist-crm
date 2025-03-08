@@ -3,7 +3,7 @@ import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/my-custom";
 import { DatePicker } from "@/components/ui/date-picker";
 import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { governmentDetailsSchema } from "@/types/partner.types";
+import type { governmentDetailsSchema } from "../../../types/types/partner.types";
 
 export function GovernmentDetailsForm({
   form,

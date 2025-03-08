@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/my-custom";
 import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { credentialsSchema } from "@/types/partner.types";
+import type { credentialsSchema } from "../../../types/types/partner.types";
 
 export function CredentialsForm({
   form,

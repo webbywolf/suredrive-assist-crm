@@ -98,6 +98,7 @@ const SidebarContent = () => {
   };
   const expand = false;
   const isActive = (path: string) => pathname.includes(path);
+
   return (
     <div className="py-3 flex-1 overflow-auto">
       <Accordion

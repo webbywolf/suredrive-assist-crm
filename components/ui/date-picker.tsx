@@ -1,43 +1,53 @@
-"use client"
-import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
+import React from "react";
+import type { DatePickerProps } from "antd";
+import { DatePicker as AntdDatePicker, Space } from "antd";
+import moment from "moment";
+import dayjs from "dayjs";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-
-interface DatePickerProps {
-  date: Date | undefined
-  setDate: (date: Date | undefined) => void
-  className?: string
-  placeholder?: string
+interface CustomDatePickerProps {
+  label: string;
+  name: string;
+  defaulValue?: any;
+  value?: dayjs.Dayjs | null | undefined;
+  onChange?:
+    | ((date: dayjs.Dayjs, dateString: string | string[]) => void)
+    | undefined;
+  disabled?: boolean;
+  className?: string;
 }
 
-export function DatePicker({
-  date,
-  setDate,
+export const DatePicker = ({
+  label,
+  name,
+  defaulValue,
+  value,
+  onChange,
+  disabled,
   className,
-  placeholder = "Select date",
-}: DatePickerProps) {
+  ...rest
+}: CustomDatePickerProps) => {
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant={"outline"}
-          className={cn(
-            "w-full justify-start text-left font-normal",
-            !date && "text-muted-foreground",
-            className
-          )}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span>{placeholder}</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
-        <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
-      </PopoverContent>
-    </Popover>
-  )
-}
+    <div className="div">
+      <label className="text-[14px] capitalize font-medium text-gray-700 mb-[6px] block">
+        {label}
+      </label>
+      <AntdDatePicker
+        name={name}
+        className={cn(
+          "flex w-full text-sm bg-white px-4 !py-[10px] !text-gray-600 !border-2 !border-border !rounded-md !outline-none !hover:border-2 !hover:border-brand-secondary/20 !focus:border-2  transition-all",
+          className,
+        )}
+        defaultValue={dayjs(defaulValue, "YYYY-MM-DD")}
+        value={
+          value && value !== null && value !== undefined
+            ? dayjs(value, "YYYY-MM-DD")
+            : null
+        }
+        onChange={onChange}
+        disabled={disabled}
+        {...rest}
+      />
+    </div>
+  );
+};

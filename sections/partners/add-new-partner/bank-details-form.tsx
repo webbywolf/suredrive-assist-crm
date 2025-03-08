@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/my-custom";
 import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { bankDetailsSchema } from "@/types/partner.types";
+import type { bankDetailsSchema } from "../../../types/types/partner.types";
 
 export function BankDetailsForm({
   form,

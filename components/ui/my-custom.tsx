@@ -25,8 +25,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           type={show ? "text" : type}
           className={cn(
-            "flex w-full text-sm bg-white px-4 py-[10px] text-gray-600 border-2 border-border rounded-md outline-none hover:border-2 hover:border-brand-secondary/20 focus:border-2 focus:border-brand-secondary/50 focus:shadow-input disabled:bg-gray-100 read-only:focus:border-border read-only:bg-gray-100 transition-all",
+            "flex w-full text-sm cursor-pointer bg-white px-4 py-[10px] text-gray-600 border-2 border-border rounded-md outline-none hover:border-2 hover:border-brand-secondary/20 focus:border-2 focus:border-brand-secondary/50 focus:shadow-input disabled:bg-gray-100 read-only:focus:border-border read-only:bg-gray-100 transition-all",
             className,
+            {
+              "!bg-white file:": type === "file",
+            },
           )}
           ref={ref}
           {...props}

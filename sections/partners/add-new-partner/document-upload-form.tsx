@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/my-custom";
 import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { documentSchema } from "@/types/partner.types";
+import type { documentSchema } from "../../../types/types/partner.types";
 
 export function DocumentUploadForm({
   form,
@@ -72,15 +72,6 @@ export function DocumentUploadForm({
                 {form.formState.errors.bankStatement.message}
               </p>
             )}
-          </div>
-
-          <div className="flex justify-between pt-4">
-            <Button type="button" variant="outline" onClick={onPrevious}>
-              Previous
-            </Button>
-            <Button type="submit" variant="brand">
-              Next
-            </Button>
           </div>
         </form>
       </Form>
