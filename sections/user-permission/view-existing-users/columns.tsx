@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Header, Users } from "./types";
+import { Users } from "./types";
 import {
   ArrowUpDown,
   Delete,

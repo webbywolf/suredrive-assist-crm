@@ -1,5 +1,16 @@
-import React from "react"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
+import React from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import Link from "next/link";
+import { Button } from "../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+} from "../ui/dropdown-menu";
+import { Bell } from "lucide-react";
 
 export default function Topbar() {
   return (
@@ -10,7 +21,26 @@ export default function Topbar() {
             <p>Welcome, Diwakar</p>
           </div>
         </div>
-        <div className="flex gap-2 justify-center items-center">
+
+        <div className="flex gap-4 items-center">
+          <div>
+            <Button variant="outline" size="lg" className="rounded-sm">
+              Raise an issue
+            </Button>
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild className="cursor-pointer">
+              <Button size="icon" variant="outline">
+                <Bell />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-[150px]">
+              <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              Hello
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <div className="flex justify-center items-center flex-col">
             <p className="text-sm ">Diwakar</p>
             <p className="text-sm text-muted-foreground">admin</p>
@@ -25,5 +55,5 @@ export default function Topbar() {
         </div>
       </nav>
     </header>
-  )
+  );
 }

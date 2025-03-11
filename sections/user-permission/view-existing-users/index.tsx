@@ -81,7 +81,7 @@ export default function ExistingUsers() {
     <DataTable
       columns={columns}
       data={data}
-      filterOptions={{ label: "Employee ID", value: "id" }}
+      filterOptions={{ label: "Employee ID", value: "employee_id" }}
       addButton={{ label: "Add New", location: "/users/add-new" }}
       paginationOption
     />

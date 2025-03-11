@@ -9,9 +9,7 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
     <div className="w-full flex h-dvh overflow-hidden">
       <Sidebar />
       <div
-        className={cn(
-          `relative w-full h-dvh flex flex-col bg-gray-100 overflow-y-auto `,
-        )}
+        className={cn(`relative w-full h-dvh flex flex-col bg-gray-100  `)}
         style={{ transition: "all 0.3s ease-in-out 0s" }}
       >
         <Topbar />

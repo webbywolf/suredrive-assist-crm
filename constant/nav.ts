@@ -24,6 +24,8 @@ import {
   IdCard,
   NotebookTabs,
   Settings,
+  Building2,
+  User2,
 } from "lucide-react";
 
 export const navList = [
@@ -114,5 +116,17 @@ export const navList = [
     name: "Permissions",
     icon: Settings,
     path: "/permissions",
+  },
+  {
+    id: 6,
+    name: "Departments",
+    icon: Building2,
+    path: "/departments",
+  },
+  {
+    id: 8,
+    name: "Roles",
+    icon: User2,
+    path: "/roles-permissions",
   },
 ];
