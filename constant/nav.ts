@@ -113,20 +113,24 @@ export const navList = [
   },
   {
     id: 5,
-    name: "Permissions",
+    name: "Roles & Permissions",
     icon: Settings,
-    path: "/permissions",
+    path: "/roles-permissions",
+    submenu: [
+      {
+        name: "Roles",
+        path: "/roles-permissions/roles",
+      },
+      {
+        name: "Permissions",
+        path: "/roles-permissions/permissions",
+      },
+    ],
   },
   {
     id: 6,
     name: "Departments",
     icon: Building2,
     path: "/departments",
-  },
-  {
-    id: 8,
-    name: "Roles",
-    icon: User2,
-    path: "/roles-permissions",
   },
 ];

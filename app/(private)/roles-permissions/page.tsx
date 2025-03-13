@@ -1,5 +1,5 @@
-import { Roles } from "@/sections/roles-permissions/roles";
+import { redirect } from "next/navigation";
 
-export default function RolesPage() {
-  return <Roles />;
+export default async function page() {
+  return redirect("/roles-permissions/roles");
 }
