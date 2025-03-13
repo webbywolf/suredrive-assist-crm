@@ -1,7 +1,5 @@
-export default function ProfilePage() {
-  return (
-    <div>
-     
-    </div>
-  );
+import { Profile } from "@/sections/profile";
+
+export default function page() {
+  return <Profile />;
 }

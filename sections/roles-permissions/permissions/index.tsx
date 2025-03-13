@@ -8,12 +8,24 @@ import {
   Edit,
   EllipsisVertical,
   Pencil,
+  Plus,
   Trash2,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import UserPermission from "@/sections/user-permission/permission";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
 export interface Permission {
   name: string;
@@ -21,7 +33,7 @@ export interface Permission {
   created_date: string;
 }
 
-const tableData: User[] = [
+const tableData: Permission[] = [
   {
     name: "Management",
     assigned_to: ["Administrator"],
@@ -74,7 +86,8 @@ export default function AllPermissionsTable() {
     <DataTable
       columns={columns}
       data={tableData}
-      filterOptions={{ label: "Employee ID", value: "id" }}
+      filterOptions={{ label: "Role Name", value: "name" }}
+      addButton={<AddPermission />}
       paginationOption
     />
   );
@@ -139,13 +152,109 @@ const columns: ColumnDef<Permission>[] = [
             <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
               <Trash2 size={20} />
             </button>
-
-            <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
-              <Pencil size={20} />
-            </button>
+            <EditPermission>
+              <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
+                <Pencil size={20} />
+              </button>
+            </EditPermission>
           </div>
         </div>
       );
     },
   },
 ];
+
+function AddPermission() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline">
+          <Plus /> Add Permission
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Add New Permission</DialogTitle>
+          <DialogDescription>
+            Permissions you may use and assign to your users.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4 pb-5">
+          <div className="">
+            <Input
+              label="Permission Name"
+              id="permissionName"
+              className="col-span-3"
+            />
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox id="terms" />
+            <label
+              htmlFor="terms"
+              className="text-sm cursor-pointer font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Set as core permission
+            </label>
+          </div>
+        </div>
+        <DialogFooter className="gap-5">
+          <Button type="submit" variant="brand">
+            Create Permission
+          </Button>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+const EditPermission = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit Permission</DialogTitle>
+          <DialogDescription>
+            Edit permission as per your requirements.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4">
+          <div className="text-sm bg-yellow-200 text-yellow-800 font-medium w-full p-3  rounded-md">
+            <p>Warning </p>
+            <p>
+              By editing the permission name, you might break the system
+              permissions functionality. Please ensure you're absolutely certain
+              before proceeding.
+            </p>
+          </div>
+          <Input
+            label="Permission Name"
+            required
+            id="permissionName"
+            className="col-span-3"
+          />
+          <div className="flex items-center space-x-2">
+            <Checkbox id="terms" />
+            <label
+              htmlFor="terms"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Set as core permission
+            </label>
+          </div>
+        </div>
+        <DialogFooter className="gap-5">
+          <Button type="submit" variant="brand">
+            Update
+          </Button>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};

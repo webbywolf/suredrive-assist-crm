@@ -50,7 +50,7 @@ interface DataTableProps<TData, TValue> {
   paginationOption?: boolean;
   forceDisabledButton?: boolean;
   filterOptions?: { label: string; value: string };
-  addButton?: { label: string; location: string };
+  addButton?: React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({
@@ -133,11 +133,7 @@ export function DataTable<TData, TValue>({
           </span>
         </div>
 
-        {addButton && (
-          <Button variant="outline" size="lg" className="text-slate-600">
-            <Link href={addButton.location}>{addButton.label}</Link>
-          </Button>
-        )}
+        {addButton}
         <input
           placeholder={`Search by ${filterOptions.label}`}
           type="text"

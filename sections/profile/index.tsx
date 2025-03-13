@@ -1,6 +1,5 @@
 "use client";
 import { cn } from "@/lib/utils";
-import Admission from "@/tabs/student/admission";
 import {
   LibraryBig,
   SunMoon,
@@ -8,18 +7,14 @@ import {
   Backpack,
   Printer,
   Trash,
+  DeleteIcon,
+  Delete,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import React, { useState } from "react";
-import Personal from "@/tabs/student/personal";
-import Seat from "@/tabs/student/seat";
-import Attendance from "@/tabs/student/attendace";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import toast from "react-hot-toast";
-import DeleteStudent from "@/components/actions/DeleteStudent";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 
 interface PersonalDetails {
   _id: string;
@@ -92,8 +87,7 @@ export interface StudentProps {
   data: studentData;
 }
 
-const Student = ({ data }: StudentProps) => {
-  const { personal, admission, payment } = data;
+export const Profile = () => {
   const [tab, setTab] = useState("0");
 
   const tabs = [
@@ -141,41 +135,14 @@ const Student = ({ data }: StudentProps) => {
               //   !admission.libraryAccess && !admission.fullDayAccess,
             })}
           >
-            <AvatarImage
-              src={
-                personal.gender === "male"
-                  ? "/assets/images/boy.jpeg"
-                  : "/assets/images/girl.jpeg"
-              }
-              alt="@shadcn"
-            />
-            <AvatarFallback className="font-semibold">
-              {personal.name.charAt(0)} &nbsp; {personal.surname.charAt(0)}
-            </AvatarFallback>
-            {admission.libraryAccess && admission.fullDayAccess && (
-              <Crown
-                size={20}
-                className=" absolute -top-0 -right-1 z-10 text-yellow-600"
-              />
-            )}
-            {admission.libraryAccess && !admission.fullDayAccess && (
-              <LibraryBig
-                size={20}
-                className=" absolute -top-0 -right-1 z-10 text-blue-600"
-              />
-            )}
-            {!admission.libraryAccess && admission.fullDayAccess && (
-              <SunMoon
-                size={20}
-                className=" absolute -top-0 -right-1 z-10 text-lime-600"
-              />
-            )}
+            <AvatarImage src="" alt="@shadcn" />
+            <AvatarFallback className="font-semibold">DS</AvatarFallback>
           </Avatar>
           <h2 className="text-lg font-bold text-gray-700 capitalize">
-            {personal.name} {personal.surname}
+            Diwakar Singh
           </h2>
           <span className="text-[10px] px-2 p-[2px] text-gray-500 border border-gray-200 rounded-full">
-            Roll No: {admission.rollNo}
+            Employee Id: 001
           </span>
         </div>
         <div className="text-sm text-center flex flex-col gap-2 text-gray-600">
@@ -184,30 +151,18 @@ const Student = ({ data }: StudentProps) => {
           </span>
           <div className="flex items-center gap-2 justify-center">
             <Backpack size={20} />
-            <span>Facility Access</span>
+            <span>Role: CEO</span>
           </div>
-          {admission.libraryAccess && (
-            <div className="flex items-center gap-2 justify-center">
-              <LibraryBig size={20} />
-              <span>Library Access</span>
-            </div>
-          )}
-          {admission.fullDayAccess && (
-            <div className="flex items-center gap-2 justify-center">
-              <SunMoon size={20} />
-              <span>Full Day Access</span>
-            </div>
-          )}
         </div>
       </div>
 
       <div className="col-span-9 row-span-12 rounded-md flex flex-col gap-4">
         <Tabs defaultValue={tab} className="" onValueChange={setTab}>
-          <TabsList className="w-full bg-white p-2.5 border justify-start border-gray-200 gap-1">
+          <TabsList className="w-full bg-white items-center h-10">
             {tabs.map((slot) => (
               <TabsTrigger
                 value={slot.id}
-                className="capitalize py-2.5 border border-gray-200"
+                className="capitalize py-2.5 h-9 cursor-pointer data-[state=active]:bg-brand-secondary data-[state=active]:text-background "
                 key={slot.id}
               >
                 {slot.name}
@@ -215,27 +170,36 @@ const Student = ({ data }: StudentProps) => {
             ))}
           </TabsList>
         </Tabs>
-        {tab === "0" && <Attendance admissionId={data.admission._id} />}
-        {tab === "1" && <Admission admission={admission} payment={payment} />}
-        {tab === "2" && <Personal student={data} />}
-        {tab === "3" && <Seat student={data} />}
+        {tab === "0" && (
+          <div className="flex-1 div-center bg-background border border-border rounded-md">
+            {" "}
+            Tab 1 Content
+          </div>
+        )}
+        {tab === "1" && (
+          <div className="flex-1 div-center bg-background border border-border rounded-md">
+            {" "}
+            Tab 2 Content
+          </div>
+        )}
+        {tab === "2" && (
+          <div className="flex-1 div-center bg-background border border-border rounded-md">
+            {" "}
+            Tab 3 Content
+          </div>
+        )}
+        {tab === "3" && (
+          <div className="flex-1 div-center bg-background border border-border rounded-md">
+            {" "}
+            Tab 4 Content
+          </div>
+        )}
       </div>
       <div className="col-span-3 row-span-6 flex flex-col gap-2.5">
-        <button
-          disabled={true}
-          className="disabled:cursor-not-allowed disabled:bg-gray-200 flex items-center gap-1 justify-center text-sm font-medium border border-gray-200 px-4 py-3 w-full rounded-md bg-white text-gray-600 hover:bg-gray-900 transition-all"
-        >
-          <Printer size={16} /> Print Admission
-        </button>
-        <DeleteStudent
-          id={data._id}
-          name={data.personal.name}
-          surname={data.personal.surname}
-          buttonType="button"
-        />
+        <Button variant="destructive">
+          <Trash /> Delete Account
+        </Button>
       </div>
     </div>
   );
 };
-
-export default Student;

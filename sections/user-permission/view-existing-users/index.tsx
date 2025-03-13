@@ -2,6 +2,8 @@ import React from "react";
 import { Users } from "./types";
 import { columns } from "./columns";
 import { DataTable } from "@/components/table/DataTable";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const data: Users[] = [
   {
@@ -82,8 +84,16 @@ export default function ExistingUsers() {
       columns={columns}
       data={data}
       filterOptions={{ label: "Employee ID", value: "employee_id" }}
-      addButton={{ label: "Add New", location: "/users/add-new" }}
+      addButton={<AddButton />}
       paginationOption
     />
   );
 }
+
+const AddButton = () => {
+  return (
+    <Button variant="outline" size="lg" className="text-slate-600">
+      <Link href={"/users/add-new"}>Add New</Link>
+    </Button>
+  );
+};

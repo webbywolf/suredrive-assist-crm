@@ -46,11 +46,16 @@ export default function Topbar() {
             <p className="text-sm text-muted-foreground">admin</p>
           </div>
           <div className="relative">
-            <Avatar className="relative z-1">
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <span className="absolute bottom-0 right-0 size-2 rounded-full bg-green-600 z-10" />
+            <Link href="/profile">
+              <Avatar className="relative z-1">
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="@shadcn"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <span className="absolute bottom-0 right-0 size-2 rounded-full bg-green-600 z-10" />
+            </Link>
           </div>
         </div>
       </nav>
