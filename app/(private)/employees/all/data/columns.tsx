@@ -1,20 +1,18 @@
-"use client";
+"use client"
+import { ColumnDef } from "@tanstack/react-table"
+import { ArrowUpDown, Delete, Edit, EllipsisVertical, Pencil, Trash2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Chip } from "@/components/ui/chip"
+export type Employee = {
+  employee_id: string
+  name: string
+  status: string
+  role: string
+  created_by: string
+}
 
-import { ColumnDef } from "@tanstack/react-table";
-import { Users } from "./types";
-import {
-  ArrowUpDown,
-  Delete,
-  Edit,
-  EllipsisVertical,
-  Pencil,
-  Trash2,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Chip } from "@/components/ui/chip";
-
-export const columns: ColumnDef<Users>[] = [
+export const columns: ColumnDef<Employee>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -40,9 +38,7 @@ export const columns: ColumnDef<Users>[] = [
   {
     accessorKey: "employee_id",
     header: "Employee ID",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("employee_id")}</div>
-    ),
+    cell: ({ row }) => <div className="capitalize">{row.getValue("employee_id")}</div>,
   },
   {
     accessorKey: "name",
@@ -74,10 +70,7 @@ export const columns: ColumnDef<Users>[] = [
     accessorKey: "status",
     header: () => <div className=" uppercase">Status</div>,
     cell: ({ row }) => (
-      <Chip
-        className="w-20 items-center"
-        variant={row.getValue("status").toLowerCase()}
-      >
+      <Chip className="w-20 items-center" variant={row.getValue("status")}>
         {row.getValue("status")}
       </Chip>
     ),
@@ -85,9 +78,7 @@ export const columns: ColumnDef<Users>[] = [
   {
     accessorKey: "created_on",
     header: () => <div className="text-center uppercase">Created On</div>,
-    cell: ({ row }) => (
-      <div className="capitalize text-center">{row.getValue("created_on")}</div>
-    ),
+    cell: ({ row }) => <div className="capitalize text-center">{row.getValue("created_on")}</div>,
   },
   {
     id: "actions",
@@ -107,7 +98,7 @@ export const columns: ColumnDef<Users>[] = [
             <EllipsisVertical size={20} />
           </button>
         </div>
-      );
+      )
     },
   },
-];
+]
