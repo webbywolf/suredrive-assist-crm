@@ -31,8 +31,8 @@ export function LegalDetailsForm({
           <Input
             label="Aadhaar Number"
             placeholder="Enter Aadhaar number"
-            {...form.register("aadhar")}
-            className={form.formState.errors.aadhar ? "border-red-500" : ""}
+            // {...form.register("aadhar")}
+            // className={form.formState.errors.aadhar ? "border-red-500" : ""}
           />
         </div>
         <div>
@@ -41,8 +41,8 @@ export function LegalDetailsForm({
             <Input
               label="Account Holder Name"
               placeholder="Enter Account Holder Name"
-              {...form.register("accountHolderName")}
-              className={form.formState.errors.accountHolderName ? "border-red-500" : ""}
+              // {...form.register("accountHolderName")}
+              // className={form.formState.errors.accountHolderName ? "border-red-500" : ""}
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -55,14 +55,14 @@ export function LegalDetailsForm({
             <Input
               label="Bank Name"
               placeholder="Enter Bank Name"
-              {...form.register("bankName")}
-              className={form.formState.errors.bankName ? "border-red-500" : ""}
+              // {...form.register("bankName")}
+              // className={form.formState.errors.bankName ? "border-red-500" : ""}
             />
             <Input
               label="IFSC Code"
               placeholder="Enter IFSC Code"
-              {...form.register("ifscCode")}
-              className={form.formState.errors.ifscCode ? "border-red-500" : ""}
+              // {...form.register("ifscCode")}
+              // className={form.formState.errors.ifscCode ? "border-red-500" : ""}
             />
             <Input
               label="Upload Cancelled Cheque"
@@ -70,9 +70,9 @@ export function LegalDetailsForm({
               accept=".png,.jpg,.jpeg"
               onChange={(e) => {
                 const file = e.target.files?.[0]
-                form.setValue("cancelledCheque", file ? file.name : "")
+                // form.setValue("cancelledCheque", file ? file.name : "")
               }}
-              className={form.formState.errors.cancelledCheque ? "border-red-500" : ""}
+              // className={form.formState.errors.cancelledCheque ? "border-red-500" : ""}
             />
           </div>
         </div>
@@ -82,8 +82,8 @@ export function LegalDetailsForm({
             <Input
               label="UAN Number"
               placeholder="Enter UAN number"
-              {...form.register("uanNumber")}
-              className={form.formState.errors.uanNumber ? "border-red-500" : ""}
+              // {...form.register("uanNumber")}
+              // className={form.formState.errors.uanNumber ? "border-red-500" : ""}
             />
             <Input
               label="Upload UAN Card"
@@ -91,9 +91,9 @@ export function LegalDetailsForm({
               accept=".png,.jpg,.jpeg"
               onChange={(e) => {
                 const file = e.target.files?.[0]
-                form.setValue("uanCard", file ? file.name : "")
+                // form.setValue("uanCard", file ? file.name : "")
               }}
-              className={form.formState.errors.uanCard ? "border-red-500" : ""}
+              // className={form.formState.errors.uanCard ? "border-red-500" : ""}
             />
           </div>
         </div>

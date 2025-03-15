@@ -45,8 +45,8 @@ export function PersonalInformationForm({
             <Input
               label="First Name"
               placeholder="Enter Name"
-              {...register("name")}
-              className={errors.name ? "border-red-500" : ""}
+              // {...register("name")}
+              // className={errors.name ? "border-red-500" : ""}
             />
             <Input
               label="Last Name"

@@ -126,7 +126,7 @@ export function AddNewService({}) {
                 <FormItem>
                   <FormLabel>Service Description</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="" {...field} />
+                    <Textarea placeholder="" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
