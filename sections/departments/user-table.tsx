@@ -1,25 +1,17 @@
-"use client";
-import React from "react";
-import { DataTable } from "@/components/table/DataTable";
-import { ColumnDef } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  Delete,
-  Edit,
-  EllipsisVertical,
-  Pencil,
-  Trash2,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { cn } from "@/lib/utils";
-import UserPermission from "../user-permission/permission";
+"use client"
+import React from "react"
+import { DataTable } from "@/components/table/DataTable"
+import { ColumnDef } from "@tanstack/react-table"
+import { ArrowUpDown, Delete, Edit, EllipsisVertical, Pencil, Trash2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import { cn } from "@/lib/utils"
 
 export interface User {
-  id: string;
-  name: string;
-  department: string;
-  status: string;
+  id: string
+  name: string
+  department: string
+  status: string
 }
 
 const tableData: User[] = [
@@ -113,7 +105,7 @@ const tableData: User[] = [
     department: "Operations",
     status: "Inactive",
   },
-];
+]
 
 export default function AllUsersTable() {
   return (
@@ -123,7 +115,7 @@ export default function AllUsersTable() {
       filterOptions={{ label: "Employee ID", value: "id" }}
       paginationOption
     />
-  );
+  )
 }
 
 const columns: ColumnDef<User>[] = [
@@ -162,9 +154,7 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: "department",
     header: () => <div className=" uppercase">Department</div>,
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("department")}</div>
-    ),
+    cell: ({ row }) => <div className="capitalize">{row.getValue("department")}</div>,
   },
   {
     accessorKey: "status",
@@ -174,7 +164,7 @@ const columns: ColumnDef<User>[] = [
         className={cn(
           "capitalize border border-gray-300 bg-white rounded-full w-20 text-center p-1.5 text-[12px] ",
           { "bg-green-700 text-white": row.getValue("status") === "Active" },
-          { "bg-amber-500 text-white": row.getValue("status") !== "Active" },
+          { "bg-amber-500 text-white": row.getValue("status") !== "Active" }
         )}
       >
         {row.getValue("status")}
@@ -186,27 +176,27 @@ const columns: ColumnDef<User>[] = [
     id: "actions",
     header: () => <div className="text-right uppercase pr-6">Actions</div>,
     cell: ({ row }) => {
-      console.log(row.getValue("id"));
+      console.log(row.getValue("id"))
       return (
         <div className="flex gap-2 justify-end pr-3">
           <div className="flex gap-2">
             <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
               <Trash2 size={20} />
             </button>
-            <UserPermission
+            {/* <UserPermission
               empId={row.getValue("id")}
               empName={row.getValue("name")}
             >
               <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
                 <Pencil size={20} />
               </button>
-            </UserPermission>
+            </UserPermission> */}
           </div>
           {/* <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
             <EllipsisVertical size={20} />
           </button> */}
         </div>
-      );
+      )
     },
   },
-];
+]

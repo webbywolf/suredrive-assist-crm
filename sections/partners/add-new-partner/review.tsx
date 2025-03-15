@@ -2,17 +2,12 @@ import type { z } from "zod"
 import { format } from "date-fns"
 import { Button } from "@/components/ui/button"
 import type { StepComponentProps } from "@/components/multi-step-form/types"
-import type { companyRegistrationSchema } from "../../../types/types/partner.types"
+// import type { companyRegistrationSchema } from "../../../types/types/partner.types"
 import { LabelAndValue } from "@/components/ui/customInput"
 
-type FormData = z.infer<typeof companyRegistrationSchema>
+type FormData = z.infer<any>
 
-export function ReviewForm({
-  form,
-  onNext,
-  onPrevious,
-  isLastStep,
-}: StepComponentProps<typeof companyRegistrationSchema>) {
+export function ReviewForm({ form, onNext, onPrevious, isLastStep }: StepComponentProps<any>) {
   const formData = form.getValues() as FormData
 
   const getBusinessTypeLabel = (value: string | undefined) => {
