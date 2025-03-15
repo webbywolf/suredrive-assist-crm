@@ -27,8 +27,9 @@ export const personalInfoSchema = z.object({
   }),
   contactNumber: z
     .string()
-    .regex(/^\+?[1-9]\d{9,14}$/, "Please enter a valid contact number")
-    .min(10, "Contact number must be at least 10 digits"),
+    .min(10, "Phone number must be at least 10 digits long")
+    .max(10, "Phone number must be at most 10 digits long")
+    .regex(/^\d+$/, "Phone number must contain only digits"),
   email: z
     .string()
     .email("Please enter a valid email address")
@@ -67,11 +68,9 @@ export const personalInfoSchema = z.object({
     .max(30, "Relationship cannot exceed 30 characters"),
   emergencyNumber: z
     .string()
-    .regex(
-      /^\+?[1-9]\d{9,14}$/,
-      "Please enter a valid emergency contact number",
-    )
-    .min(10, "Emergency contact number must be at least 10 digits"),
+    .min(10, "Phone number must be at least 10 digits long")
+    .max(10, "Phone number must be at most 10 digits long")
+    .regex(/^\d+$/, "Phone number must contain only digits"),
 });
 
 // Legal Details Schema

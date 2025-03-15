@@ -17,6 +17,7 @@ export function StepThree({
   onPrevious,
   isLastStep,
 }: StepComponentProps<any>) {
+  console.log("StepThree", form.formState.errors);
   return (
     <div className="space-y-6">
       <Form {...form}>
