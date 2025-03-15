@@ -26,7 +26,7 @@ export function WorkExperienceForm({
   onPrevious,
   isLastStep,
 }: StepComponentProps<typeof workExperienceSchema>) {
-  const isExperienced = Number(form.watch("experience")) === 2
+  // const isExperienced = Number(form.watch("experience")) === 2
   return (
     <div className="space-y-6">
       <Form {...form}>
@@ -41,10 +41,10 @@ export function WorkExperienceForm({
                   <div key={item.id} className="flex items-center gap-2">
                     <Checkbox
                       className="border-gray-600"
-                      checked={form.watch("experience") === item.id}
-                      onCheckedChange={(checked) => {
-                        form.setValue("experience", checked ? item.id : undefined)
-                      }}
+                      // checked={form.watch("experience") === item.id}
+                      // onCheckedChange={(checked) => {
+                      //   form.setValue("experience", checked ? item.id : undefined)
+                      // }}
                     />
                     <label>{item.label}</label>
                   </div>
@@ -58,13 +58,13 @@ export function WorkExperienceForm({
               type="file"
               accept=".pdf"
               label="Upload Resume"
-              onChange={(e) => {
-                const file = e.target.files?.[0]
-                form.setValue("image", file ? file.name : "")
-              }}
+              // onChange={(e) => {
+              //   const file = e.target.files?.[0]
+              //   form.setValue("image", file ? file.name : "")
+              // }}
             />
 
-            {!!isExperienced && (
+            {/* {!!isExperienced && (
               <Input
                 type="file"
                 accept=".pdf"
@@ -74,10 +74,10 @@ export function WorkExperienceForm({
                   form.setValue("image", file ? file.name : "")
                 }}
               />
-            )}
+            )} */}
           </div>
 
-          {!!isExperienced && (
+          {/* {!!isExperienced && (
             <div>
               <p className="text-lg pb-3">Previous Experience</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -105,13 +105,13 @@ export function WorkExperienceForm({
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           <div>
             <p className="text-lg pb-3">Reference</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-center gap-2">
-                <Checkbox className="border-gray-600" {...form.register("reference")} />
+                {/* <Checkbox className="border-gray-600" {...form.register("reference")} /> */}
                 <label>Have Reference</label>
               </div>
             </div>
@@ -120,7 +120,7 @@ export function WorkExperienceForm({
               <Input
                 label="Person Name"
                 placeholder="Enter Reference Name"
-                {...form.register("aadhar")}
+                // {...form.register("aadhar")}
               />
 
               <Input
@@ -129,7 +129,7 @@ export function WorkExperienceForm({
                 label="Upload Reference Letter"
                 onChange={(e) => {
                   const file = e.target.files?.[0]
-                  form.setValue("refLetter", file ? file.name : "")
+                  // form.setValue("refLetter", file ? file.name : "")
                 }}
               />
             </div>

@@ -11,7 +11,8 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <Page title="Employee Onboarding">
-      <EmployeeOnboarding />
+      {/* <EmployeeOnboarding /> */}
+      <h1>Employee Onboarding</h1>
     </Page>
   )
 }

@@ -10,14 +10,14 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/customInput"
 import type { StepComponentProps } from "@/components/multi-step-form/types"
-import type { bankDetailsSchema } from "../../../types/types/partner.types"
+// import type { bankDetailsSchema } from "../../../types/types/partner.types"
 
 export function BankDetailsForm({
   form,
   onNext,
   onPrevious,
   isLastStep,
-}: StepComponentProps<typeof bankDetailsSchema>) {
+}: StepComponentProps<any>) {
   return (
     <div className="space-y-6">
       <Form {...form}>

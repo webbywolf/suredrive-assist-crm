@@ -70,7 +70,7 @@ export function ReviewForm({
           <h3 className="text-lg font-medium border-b pb-2">Legal/Identification Details</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <LabelAndValue label="PAN Number" value={formData.pan} />
-            <LabelAndValue label="Aadhaar Number" value={formData.aadhar} />
+            {/* <LabelAndValue label="Aadhaar Number" value={formData.aadhar} /> */}
           </div>
         </div>
 
@@ -78,14 +78,14 @@ export function ReviewForm({
         <div className="space-y-3">
           <h3 className="text-lg font-medium border-b pb-2">Bank Details</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <LabelAndValue label="Account Holder Name" value={formData.accountHolderName} />
+            {/* <LabelAndValue label="Account Holder Name" value={formData.accountHolderName} /> */}
             <LabelAndValue label="Account Number" value={formData.accountNumber} />
             <LabelAndValue label="Bank Name" value={formData.bankName} />
-            <LabelAndValue label="IFSC Code" value={formData.ifscCode} />
-            <LabelAndValue
+            {/* <LabelAndValue label="IFSC Code" value={formData.ifscCode} /> */}
+            {/* <LabelAndValue
               label="Cancelled Cheque"
-              value={formData.cancelledCheque ? "Uploaded" : "Not Uploaded"}
-            />
+              // value={formData.cancelledCheque ? "Uploaded" : "Not Uploaded"}
+            /> */}
           </div>
         </div>
 
@@ -93,11 +93,11 @@ export function ReviewForm({
         <div className="space-y-3">
           <h3 className="text-lg font-medium border-b pb-2">PF/ESI Details</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <LabelAndValue label="UAN Number" value={formData.uanNumber} />
-            <LabelAndValue
+            {/* <LabelAndValue label="UAN Number" value={formData.uanNumber} /> */}
+            {/* <LabelAndValue
               label="UAN Card"
               value={formData.uanCard ? "Uploaded" : "Not Uploaded"}
-            />
+            /> */}
           </div>
         </div>
 
@@ -105,14 +105,14 @@ export function ReviewForm({
         <div className="space-y-3">
           <h3 className="text-lg font-medium border-b pb-2">Work Experience</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <LabelAndValue
+            {/* <LabelAndValue
               label="Experience Level"
               value={getExperienceLabel(formData.experience)}
             />
-            <LabelAndValue label="Resume" value={formData.resume ? "Uploaded" : "Not Uploaded"} />
+            <LabelAndValue label="Resume" value={formData.resume ? "Uploaded" : "Not Uploaded"} /> */}
 
             {/* Only show these fields if experienced */}
-            {formData.experience === 2 && (
+            {/* {formData.experience === 2 && (
               <>
                 <LabelAndValue
                   label="Relieving Letter"
@@ -125,7 +125,7 @@ export function ReviewForm({
                 <LabelAndValue label="Previous Role/Designation" value={formData.role} />
                 <LabelAndValue label="Experience Summary" value={formData.experienceSummary} />
               </>
-            )}
+            )} */}
           </div>
         </div>
 
@@ -133,8 +133,8 @@ export function ReviewForm({
         <div className="space-y-3">
           <h3 className="text-lg font-medium border-b pb-2">Reference Details</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <LabelAndValue label="Has Reference" value={formData.reference ? "Yes" : "No"} />
-            {formData.reference && (
+            {/* <LabelAndValue label="Has Reference" value={formData.reference ? "Yes" : "No"} /> */}
+            {/* {formData.reference && (
               <>
                 <LabelAndValue label="Reference Name" value={formData.referenceName} />
                 <LabelAndValue
@@ -142,7 +142,7 @@ export function ReviewForm({
                   value={formData.refLetter ? "Uploaded" : "Not Uploaded"}
                 />
               </>
-            )}
+            )} */}
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@ export interface StepComponentProps<T extends z.ZodTypeAny> {
 }
 
 export interface MultiStepFormConfig<T extends z.ZodTypeAny> {
-  steps: Step<T>[]
+  steps: Array<Step<any>>
   onComplete: (data: z.infer<T>) => void | Promise<void>
   defaultValues?: Partial<z.infer<T>>
 }
