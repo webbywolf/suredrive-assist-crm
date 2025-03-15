@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/my-custom";
-import { DatePicker } from "@/components/ui/date-picker";
-import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { governmentDetailsSchema } from "../../../types/types/partner.types";
+import { Button } from "@/components/ui/button"
+import { Form } from "@/components/ui/form"
+import { Input } from "@/components/ui/customInput"
+import { DatePicker } from "@/components/ui/date-picker"
+import type { StepComponentProps } from "@/components/multi-step-form/types"
+import type { governmentDetailsSchema } from "../../../types/types/partner.types"
 
 export function GovernmentDetailsForm({
   form,
@@ -22,11 +22,7 @@ export function GovernmentDetailsForm({
               {...form.register("registrationNumber")}
             />
 
-            <Input
-              label="Tax ID"
-              placeholder="Enter tax ID"
-              {...form.register("taxId")}
-            />
+            <Input label="Tax ID" placeholder="Enter tax ID" {...form.register("taxId")} />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -55,5 +51,5 @@ export function GovernmentDetailsForm({
         </form>
       </Form>
     </div>
-  );
+  )
 }

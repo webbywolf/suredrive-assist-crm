@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import type { z } from "zod";
-import { Button } from "@/components/ui/button";
+import type { z } from "zod"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -9,20 +9,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/my-custom";
-import { Textarea } from "@/components/ui/textarea";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/customInput"
+import { Textarea } from "@/components/ui/textarea"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { companyInfoSchema } from "@/types/partner.types";
+} from "@/components/ui/select"
+import type { StepComponentProps } from "@/components/multi-step-form/types"
+import type { companyInfoSchema } from "@/types/partner.types"
 
-type FormData = z.infer<typeof companyInfoSchema>;
+type FormData = z.infer<typeof companyInfoSchema>
 
 const businessTypes = [
   { value: "sole-proprietorship", label: "Sole Proprietorship" },
@@ -30,7 +30,7 @@ const businessTypes = [
   { value: "corporation", label: "Corporation" },
   { value: "llc", label: "Limited Liability Company" },
   { value: "non-profit", label: "Non-Profit Organization" },
-];
+]
 
 const titles = [
   { value: "ceo", label: "CEO" },
@@ -39,7 +39,7 @@ const titles = [
   { value: "president", label: "President" },
   { value: "director", label: "Director" },
   { value: "manager", label: "Manager" },
-];
+]
 
 export function CompanyInfoForm({
   form,
@@ -87,9 +87,7 @@ export function CompanyInfoForm({
 
             {/* Keep the original Select component for title */}
             <div className="space-y-2">
-              <label className="text-[14px] capitalize font-medium text-gray-700">
-                Title
-              </label>
+              <label className="text-[14px] capitalize font-medium text-gray-700">Title</label>
               <Select
                 onValueChange={(value) => form.setValue("title", value)}
                 value={form.watch("title")}
@@ -136,5 +134,5 @@ export function CompanyInfoForm({
         </form>
       </Form>
     </div>
-  );
+  )
 }

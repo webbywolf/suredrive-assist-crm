@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/my-custom";
-import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { documentSchema } from "../../../types/types/partner.types";
+import { Button } from "@/components/ui/button"
+import { Form } from "@/components/ui/form"
+import { Input } from "@/components/ui/customInput"
+import type { StepComponentProps } from "@/components/multi-step-form/types"
+import type { documentSchema } from "../../../types/types/partner.types"
 
 export function DocumentUploadForm({
   form,
@@ -20,8 +20,8 @@ export function DocumentUploadForm({
               type="file"
               accept=".pdf,.doc,.docx"
               onChange={(e) => {
-                const file = e.target.files?.[0];
-                form.setValue("businessRegistration", file ? file.name : "");
+                const file = e.target.files?.[0]
+                form.setValue("businessRegistration", file ? file.name : "")
               }}
             />
             <p className="text-sm text-gray-500">
@@ -40,13 +40,11 @@ export function DocumentUploadForm({
               type="file"
               accept=".pdf,.doc,.docx"
               onChange={(e) => {
-                const file = e.target.files?.[0];
-                form.setValue("taxCertificate", file ? file.name : "");
+                const file = e.target.files?.[0]
+                form.setValue("taxCertificate", file ? file.name : "")
               }}
             />
-            <p className="text-sm text-gray-500">
-              Upload your tax certificate (PDF, DOC, DOCX)
-            </p>
+            <p className="text-sm text-gray-500">Upload your tax certificate (PDF, DOC, DOCX)</p>
             {form.formState.errors.taxCertificate && (
               <p className="text-sm text-red-500">
                 {form.formState.errors.taxCertificate.message}
@@ -60,21 +58,19 @@ export function DocumentUploadForm({
               type="file"
               accept=".pdf,.doc,.docx"
               onChange={(e) => {
-                const file = e.target.files?.[0];
-                form.setValue("bankStatement", file ? file.name : "");
+                const file = e.target.files?.[0]
+                form.setValue("bankStatement", file ? file.name : "")
               }}
             />
             <p className="text-sm text-gray-500">
               Upload your recent bank statement (PDF, DOC, DOCX)
             </p>
             {form.formState.errors.bankStatement && (
-              <p className="text-sm text-red-500">
-                {form.formState.errors.bankStatement.message}
-              </p>
+              <p className="text-sm text-red-500">{form.formState.errors.bankStatement.message}</p>
             )}
           </div>
         </form>
       </Form>
     </div>
-  );
+  )
 }

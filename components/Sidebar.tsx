@@ -1,6 +1,6 @@
-"use client";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+"use client"
+import { useState } from "react"
+import { cn } from "@/lib/utils"
 import {
   ArrowRightToLine,
   ChevronRight,
@@ -8,30 +8,33 @@ import {
   LogOut,
   Fan,
   Settings,
-} from "lucide-react";
+  Dot,
+  CircleDot,
+} from "lucide-react"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { navList } from "@/constant/nav";
+} from "@/components/ui/accordion"
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+import { navList } from "@/constant/nav"
+import Image from "next/image"
 
 const Sidebar = () => {
-  const isCollapsed = false;
+  const isCollapsed = false
   return (
-    <aside className="w-[300px] h-full flex flex-col border-r border-gray-200 px-2 sticky top-0 left-0">
+    <aside className="w-full h-full flex flex-col border-r border-gray-200">
       {/* Header */}
       <SidebarHeader />
       {/* Navigation */}
       <SidebarContent />
 
       {/* Sidebar Footer */}
-      <div className="py-3 border-t border-gray-200">
+      <div className="p-3 border-t border-gray-200">
         <button
-          className={cn(`w-full px-4 py-3 flex items-center rounded-md`, {
+          className={cn(`w-full px-4 py-3 flex items-center rounded-md cursor-pointer`, {
             "justify-center hover:bg-gray-200": isCollapsed,
             "hover:bg-gray-100": !isCollapsed,
           })}
@@ -42,33 +45,32 @@ const Sidebar = () => {
         </button>
       </div>
     </aside>
-  );
-};
+  )
+}
 
 const SidebarHeader = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false)
   const onCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+    setIsCollapsed(!isCollapsed)
+  }
   return (
     <div
-      className={cn(
-        `logo h-16 flex items-center overflow-hidden border-b border-gray-200`,
-        {
-          // "justify-center": isCollapsed,
-          // "justify-between": !isCollapsed,
-        },
-      )}
+      className={cn(`logo h-14 flex overflow-hidden border-b border-gray-200 px-3`, {
+        // "justify-center": isCollapsed,
+        // "justify-between": !isCollapsed,
+      })}
     >
-      <img
+      <Image
         loading="lazy"
-        className={cn(`object-fit scale-75`, {
+        className={cn(`object-fit`, {
           // " scale-0 w-0 hidden": isCollapsed,
           // " scale-100 w-auto ": !isCollapsed,
         })}
         src="/assets/images/logo.svg"
         alt="logo"
         style={{ transition: "all 0.3s ease" }}
+        width={160}
+        height={100}
       />
       {/* <div>
         <h1 className="font-bold text-lg">SureDrive CRM</h1>
@@ -86,27 +88,27 @@ const SidebarHeader = () => {
         <ArrowRightToLine size={23} />
       </button> */}
     </div>
-  );
-};
+  )
+}
 
 const SidebarContent = () => {
-  const pathname = usePathname();
-  const router = useRouter();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const pathname = usePathname()
+  const router = useRouter()
+  const [isCollapsed, setIsCollapsed] = useState(false)
   const onCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
-  const expand = false;
-  const isActive = (path: string) => pathname.includes(path);
+    setIsCollapsed(!isCollapsed)
+  }
+  const expand = false
+  const isActive = (path: string) => pathname.includes(path)
 
   return (
-    <div className="py-3 flex-1 overflow-auto">
+    <div className="p-3 flex-1 overflow-auto">
       <Accordion
         type="single"
         collapsible
         // defaultValue={expand.toString()}
         // value={isCollapsed ? "0" : expand.toString()}
-        className="w-full flex flex-col gap-1"
+        className="w-full flex flex-col gap-2"
       >
         {navList.map((nav, index) => {
           return (
@@ -118,21 +120,20 @@ const SidebarContent = () => {
             >
               <AccordionTrigger
                 className={cn(
-                  `px-2 py-3 capitalize font-normal cursor-pointer`,
+                  `px-2 py-2 group capitalize text-sm font-normal cursor-pointer rounded-sm`,
                   {
-                    "px-2 py-3 gap-0 justify-center hover:text-gray-600":
-                      isCollapsed,
-                    "bg-brand-secondary text-white hover:bg-brand-secondary hover:text-white":
+                    "gap-0 justify-center": isCollapsed,
+                    "bg-gray-900  text-white hover:bg-gray-900 hover:text-white &>svg:text-red-500":
                       isActive(nav.path),
-                    "data-[state=open]:bg-brand-secondary/60 data-[state=open]:text-white hover:bg-brand-secondary/60 hover:text-white":
+                    "data-[state=open]:bg-gray-200 data-[state=open]:text-gray-800 hover:bg-gray-100 hover:text-gray-800":
                       !isActive(nav.path),
                     // "bg-brand hover:bg-brand hover:text-white text-white":
                     //   expand === nav.id && isCollapsed,
-                  },
+                  }
                 )}
                 onClick={() => {
-                  if (nav.submenu) return;
-                  router.push(nav.path);
+                  if (nav.submenu) return
+                  router.push(nav.path)
                 }}
               >
                 <div
@@ -154,15 +155,11 @@ const SidebarContent = () => {
                 {nav.submenu && (
                   <ChevronRight
                     size={16}
-                    className={cn(
-                      `rotate-0 transition duration-200 data-[state=open]:rotate-60`,
-                      {
-                        "hidden invisible": isCollapsed,
-                        "inline-block": !isCollapsed,
-
-                        // "rotate-90": expand === nav.id,
-                      },
-                    )}
+                    className={cn(`rotate-0 transition duration-200 data-[state=open]:rotate-60`, {
+                      "hidden invisible": isCollapsed,
+                      "inline-block": !isCollapsed,
+                      // "rotate-90": expand === nav.id,
+                    })}
                   />
                 )}
               </AccordionTrigger>
@@ -177,34 +174,28 @@ const SidebarContent = () => {
                       <Link
                         href={sub.path}
                         className={cn(
-                          `pl-4 fill-gray-500 font-medium py-2 text-sm flex items-center gap-2 capitalize rounded-md transition-all`,
+                          `pl-4 fill-gray-500 py-2 text-[13px] flex items-center gap-2 capitalize rounded-sm transition-all`,
                           {
-                            " bg-gray-300": pathname === sub.path,
+                            "bg-gray-300 [&>svg]:text-red-500 [&>span]:border-red-500":
+                              pathname === sub.path,
                             "hover:bg-gray-100 ": pathname !== sub.path,
-                          },
+                          }
                         )}
                         key={index}
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 256 256"
-                        >
-                          <path d="M128,96a32,32,0,1,0,32,32A32,32,0,0,0,128,96Zm0,48a16,16,0,1,1,16-16A16,16,0,0,1,128,144Z"></path>
-                        </svg>
+                        <span className="size-[7px] border-[1.8px] border-gray-500 rounded-full"></span>
                         {sub.name}
                       </Link>
-                    );
+                    )
                   })}
                 </AccordionContent>
               )}
             </AccordionItem>
-          );
+          )
         })}
       </Accordion>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

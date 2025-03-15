@@ -1,20 +1,30 @@
+import Page from "@/components/layouts/Page"
 import { cn } from "@/lib/utils"
 import React from "react"
 
 const page = () => {
   return (
-    <div className="py-5 flex flex-col h-full w-full gap-2">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <AnalyticsBlock title="Total Users" content="120" />
+    <Page>
+      <section className="w-full h-full grid grid-cols-12 grid-rows-12 gap-4">
+        <AnalyticsBlock title="Employees" content="120" className="col-span-3 row-span-2" />
         <AnalyticsBlock
-          title="Total Security Warnings"
+          title="Dealers"
           content="11"
           contentClass="text-brand-primary"
+          className="col-span-3 row-span-2"
         />
-        <AnalyticsBlock title="System Uptime/Downtime" content="97%" />
-      </div>
-      <div className="bg-white flex-1 div-center border border-gray-200">Graph</div>
-    </div>
+
+        <AnalyticsBlock title="Vendors" content="1000" className="col-span-3 row-span-2" />
+        <AnalyticsBlock title="Customer" content="3000" className="col-span-3 row-span-2" />
+        <div className="col-span-12 row-span-4 border border-gray-200 bg-white rounded-sm"></div>
+        <div className="col-span-4 row-span-6 border border-gray-200 bg-white rounded-sm"></div>
+        <div className="col-span-4 row-span-6 border border-gray-200 bg-white rounded-sm"></div>
+        <div className="col-span-4 row-span-6 border border-gray-200 bg-white rounded-sm"></div>
+        {/* <div className=" col-span-3 row-span-10 h-full border border-gray-200 bg-white rounded-md">
+          Graph
+        </div> */}
+      </section>
+    </Page>
   )
 }
 
@@ -35,8 +45,13 @@ const AnalyticsBlock: React.FC<BlockProps> = ({
   children,
 }) => {
   return (
-    <div className={cn("flex flex-col p-5 bg-white border border-gray-200 font-medium", className)}>
-      <h3 className="">{title}</h3>
+    <div
+      className={cn(
+        "flex flex-col justify-center px-4 bg-white border border-gray-200 font-medium rounded-sm",
+        className
+      )}
+    >
+      <span className="text-sm text-gray-700 inline-block">{title}</span>
       <p className={cn("text-3xl font-semibold py-2", contentClass)}>{content}</p>
       {children}
     </div>

@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { z } from "zod"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -10,15 +10,13 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/my-custom";
-import type { StepComponentProps } from "@/components/multi-step-form/types";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/customInput"
+import type { StepComponentProps } from "@/components/multi-step-form/types"
 
 const credentialsSchema = z
   .object({
-    username: z
-      .string()
-      .min(3, { message: "Username must be at least 3 characters." }),
+    username: z.string().min(3, { message: "Username must be at least 3 characters." }),
     password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters." })
@@ -36,10 +34,10 @@ const credentialsSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
-  });
+  })
 
-export type CredentialsSchema = z.infer<typeof credentialsSchema>;
-export const credentialsFormSchema = credentialsSchema;
+export type CredentialsSchema = z.infer<typeof credentialsSchema>
+export const credentialsFormSchema = credentialsSchema
 
 export function CredentialsForm({
   form,
@@ -60,9 +58,7 @@ export function CredentialsForm({
             {...form.register("username")}
             error={form.formState.errors.username?.message?.toString()}
           />
-          <p className="text-sm text-muted-foreground">
-            This will be login username.
-          </p>
+          <p className="text-sm text-muted-foreground">This will be login username.</p>
 
           <Input
             label="Password"
@@ -72,8 +68,7 @@ export function CredentialsForm({
             error={form.formState.errors.password?.message?.toString()}
           />
           <p className="text-sm text-muted-foreground">
-            Password must be at least 8 characters with uppercase, lowercase,
-            and numbers.
+            Password must be at least 8 characters with uppercase, lowercase, and numbers.
           </p>
 
           <Input
@@ -95,5 +90,5 @@ export function CredentialsForm({
         </form>
       </Form>
     </div>
-  );
+  )
 }

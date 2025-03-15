@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { ChevronDown } from "lucide-react";
+import * as React from "react"
+import * as AccordionPrimitive from "@radix-ui/react-accordion"
+import { ChevronDown } from "lucide-react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-const Accordion = AccordionPrimitive.Root;
+const Accordion = AccordionPrimitive.Root
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
@@ -17,8 +17,8 @@ const AccordionItem = React.forwardRef<
     className={cn("border-b transition-all", className)}
     {...props}
   />
-));
-AccordionItem.displayName = "AccordionItem";
+))
+AccordionItem.displayName = "AccordionItem"
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
@@ -28,16 +28,16 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "w-full flex gap-2 items-center text-left text-[15px] hover:bg-gray-100 rounded-md font-medium transition-all hover:no-underline",
-        className,
+        "w-full flex gap-2 items-center text-left text-[15px] hover:bg-gray-100 font-medium transition-all hover:no-underline",
+        className
       )}
       {...props}
     >
       {children}
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
-));
-AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
+))
+AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
@@ -50,8 +50,8 @@ const AccordionContent = React.forwardRef<
   >
     <div className={cn("pb-4 pt-0", className)}>{children}</div>
   </AccordionPrimitive.Content>
-));
+))
 
-AccordionContent.displayName = AccordionPrimitive.Content.displayName;
+AccordionContent.displayName = AccordionPrimitive.Content.displayName
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }

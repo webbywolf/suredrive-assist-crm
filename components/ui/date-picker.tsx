@@ -1,20 +1,18 @@
-import React from "react";
-import type { DatePickerProps } from "antd";
-import { DatePicker as AntdDatePicker, Space } from "antd";
-import moment from "moment";
-import dayjs from "dayjs";
-import { cn } from "@/lib/utils";
+import React from "react"
+import type { DatePickerProps } from "antd"
+import { DatePicker as AntdDatePicker, Space } from "antd"
+import moment from "moment"
+import dayjs from "dayjs"
+import { cn } from "@/lib/utils"
 
 interface CustomDatePickerProps {
-  label: string;
-  name: string;
-  defaulValue?: any;
-  value?: dayjs.Dayjs | null | undefined;
-  onChange?:
-    | ((date: dayjs.Dayjs, dateString: string | string[]) => void)
-    | undefined;
-  disabled?: boolean;
-  className?: string;
+  label: string
+  name: string
+  defaulValue?: any
+  value?: dayjs.Dayjs | null | undefined
+  onChange?: ((date: dayjs.Dayjs, dateString: string | string[]) => void) | undefined
+  disabled?: boolean
+  className?: string
 }
 
 export const DatePicker = ({
@@ -35,19 +33,15 @@ export const DatePicker = ({
       <AntdDatePicker
         name={name}
         className={cn(
-          "flex w-full text-sm bg-white px-4 !py-[10px] !text-gray-600 !border-2 !border-border !rounded-md !outline-none !hover:border-2 !hover:border-brand-secondary/20 !focus:border-2  transition-all",
-          className,
+          "flex w-full text-sm bg-white px-4 !py-[10px] !text-gray-600  !border-gray-200 !rounded-md !outline-none hover:!border-gray-300/70 focus:!border-gray-500 transition-all",
+          className
         )}
         defaultValue={dayjs(defaulValue, "YYYY-MM-DD")}
-        value={
-          value && value !== null && value !== undefined
-            ? dayjs(value, "YYYY-MM-DD")
-            : null
-        }
+        value={value && value !== null && value !== undefined ? dayjs(value, "YYYY-MM-DD") : null}
         onChange={onChange}
         disabled={disabled}
         {...rest}
       />
     </div>
-  );
-};
+  )
+}

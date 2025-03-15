@@ -1,19 +1,19 @@
-"use client";
+"use client"
 
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
+import { z } from "zod"
+import { Button } from "@/components/ui/button"
+import { Form } from "@/components/ui/form"
+import { Textarea } from "@/components/ui/textarea"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import type { StepComponentProps } from "@/components/multi-step-form/types";
-import { Input } from "@/components/ui/my-custom";
-import DatePicker from "@/components/ui/date-picker";
+} from "@/components/ui/select"
+import type { StepComponentProps } from "@/components/multi-step-form/types"
+import { Input } from "@/components/ui/customInput"
+import DatePicker from "@/components/ui/date-picker"
 
 const personalInfoSchema = z.object({
   // firstName: z.string().min(2, { message: "First name must be at least 2 characters." }),
@@ -23,10 +23,10 @@ const personalInfoSchema = z.object({
   // contactNumber: z.string().min(10, { message: "Contact number must be at least 10 digits." }),
   // email: z.string().email({ message: "Please enter a valid email address." }),
   // address: z.string().min(5, { message: "Address must be at least 5 characters." }),
-});
+})
 
-export type PersonalInfoSchema = z.infer<typeof personalInfoSchema>;
-export const personalInfoFormSchema = personalInfoSchema;
+export type PersonalInfoSchema = z.infer<typeof personalInfoSchema>
+export const personalInfoFormSchema = personalInfoSchema
 
 export function PersonalInformationForm({
   form,
@@ -40,13 +40,13 @@ export function PersonalInformationForm({
     watch,
     setValue,
     handleSubmit,
-  } = form;
+  } = form
 
   // Handle file input
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    setValue("image", file ? file.name : "");
-  };
+    const file = e.target.files?.[0]
+    setValue("image", file ? file.name : "")
+  }
 
   return (
     <div className="space-y-6">
@@ -110,9 +110,7 @@ export function PersonalInformationForm({
                 </SelectContent>
               </Select>
               {errors.gender && (
-                <p className="text-sm text-red-500 mt-1">
-                  {errors.gender.message?.toString()}
-                </p>
+                <p className="text-sm text-red-500 mt-1">{errors.gender.message?.toString()}</p>
               )}
             </div>
           </div>
@@ -142,9 +140,7 @@ export function PersonalInformationForm({
               className={errors.address ? "border-red-500" : ""}
             />
             {errors.address && (
-              <p className="text-sm text-red-500 mt-1">
-                {errors.address.message?.toString()}
-              </p>
+              <p className="text-sm text-red-500 mt-1">{errors.address.message?.toString()}</p>
             )}
           </div>
 
@@ -174,5 +170,5 @@ export function PersonalInformationForm({
         </form>
       </Form>
     </div>
-  );
+  )
 }

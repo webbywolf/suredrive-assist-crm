@@ -1,20 +1,15 @@
 import React from "react"
+import Header from "@/components/Header"
 
-import { cn } from "@/lib/utils"
-import Topbar from "./topbar"
-
-const PageLayout = ({ title, children }: { title?: string; children: React.ReactNode }) => {
+const Page = ({ children, title }: { children: React.ReactNode; title?: string }) => {
   return (
-    <div
-      className={cn(`relative w-full h-dvh flex flex-col bg-gray-100 overflow-y-auto self-start`)}
-      style={{ transition: "all 0.3s ease-in-out 0s" }}
-    >
-      <Topbar />
-      <main className="h-[calc(100vh-64px)] container mx-auto py-4 px-8 overflow-auto">
-        {children}
+    <div className="h-dvh grid grid-rows-[56px_1fr] bg-gray-100">
+      <Header title={title} />
+      <main className="h-full overflow-auto p-6">
+        {children ?? <div className="flex-1 div-center">No Content</div>}
       </main>
     </div>
   )
 }
 
-export default PageLayout
+export default Page

@@ -26,7 +26,10 @@ import {
   Settings,
   Building2,
   User2,
-} from "lucide-react";
+  Users,
+  ListCheck,
+  SquareCheck,
+} from "lucide-react"
 
 export const navList = [
   {
@@ -37,43 +40,43 @@ export const navList = [
   },
   {
     id: 2,
-    name: "User & Permission",
-    icon: ShieldCheck,
-    path: "/users",
+    name: "Employees",
+    icon: Users,
+    path: "/employees",
     submenu: [
       {
         id: 1,
-        name: "Add New User",
-        path: "/users/add-new",
+        name: "Add",
+        path: "/employees/onboarding",
       },
       {
         id: 2,
-        name: "View Existing Users",
-        path: "/users",
+        name: "View All Employees",
+        path: "/employees",
       },
     ],
   },
 
   {
     id: 7,
-    name: "Pending Approvals",
-    icon: ShieldCheck,
-    path: "/pending",
+    name: "Approvals",
+    icon: SquareCheck,
+    path: "/approvals",
     submenu: [
       {
         id: 1,
-        name: "User",
-        path: "/pending/users",
+        name: "Employee",
+        path: "/approvals/users",
       },
       {
         id: 2,
         name: "Payments",
-        path: "/pending/payments",
+        path: "/approvals/payments",
       },
       {
         id: 3,
         name: "Service Escalation",
-        path: "/pending/services",
+        path: "/approvals/services",
       },
     ],
   },
@@ -85,12 +88,12 @@ export const navList = [
     submenu: [
       {
         id: 1,
-        name: "Add New Partner",
-        path: "/partners/add",
+        name: "Onboarding",
+        path: "/partners/onboarding",
       },
       {
         id: 2,
-        name: "View Existing",
+        name: "View All Partners",
         path: "/partners/all",
       },
     ],
@@ -102,11 +105,11 @@ export const navList = [
     path: "/book",
     submenu: [
       {
-        name: "Add New Service",
+        name: "Add",
         path: "/services/add",
       },
       {
-        name: "All",
+        name: "View All Services",
         path: "/services/all",
       },
     ],
@@ -118,6 +121,10 @@ export const navList = [
     path: "/roles-permissions",
     submenu: [
       {
+        name: "Departments",
+        path: "/roles-permissions/departments",
+      },
+      {
         name: "Roles",
         path: "/roles-permissions/roles",
       },
@@ -125,12 +132,14 @@ export const navList = [
         name: "Permissions",
         path: "/roles-permissions/permissions",
       },
+      {
+        name: "Assign Roles",
+        path: "/roles-permissions/assign-roles",
+      },
+      {
+        name: "Manage Access",
+        path: "/roles-permissions/manage-access",
+      },
     ],
   },
-  {
-    id: 6,
-    name: "Departments",
-    icon: Building2,
-    path: "/departments",
-  },
-];
+]

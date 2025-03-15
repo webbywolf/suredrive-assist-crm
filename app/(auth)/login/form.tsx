@@ -3,7 +3,7 @@ import React from "react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/my-custom"
+import { Input } from "@/components/ui/customInput"
 import { Loader2 } from "lucide-react"
 
 const Form = () => {
@@ -25,7 +25,7 @@ const Form = () => {
     setLoading(true)
   }
   return (
-    <div className="text-left bg-[#ffffff] border border-[#e9e9e9]/30  w-full px-8 md:p-8 md:w-[400px] mx-auto rounded-lg">
+    <div className="text-left bg-[#ffffff] w-full px-8 md:p-8 md:w-[400px] mx-auto rounded-lg z-10 border border-gray-200">
       <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
         <Input
           label="Username"

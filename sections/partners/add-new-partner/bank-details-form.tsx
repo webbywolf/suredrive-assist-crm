@@ -1,5 +1,5 @@
-"use client";
-import { Button } from "@/components/ui/button";
+"use client"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -7,10 +7,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/my-custom";
-import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { bankDetailsSchema } from "../../../types/types/partner.types";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/customInput"
+import type { StepComponentProps } from "@/components/multi-step-form/types"
+import type { bankDetailsSchema } from "../../../types/types/partner.types"
 
 export function BankDetailsForm({
   form,
@@ -58,5 +58,5 @@ export function BankDetailsForm({
         </form>
       </Form>
     </div>
-  );
+  )
 }

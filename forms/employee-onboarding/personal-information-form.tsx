@@ -1,20 +1,20 @@
-"use client";
+"use client"
 
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
+import { z } from "zod"
+import { Button } from "@/components/ui/button"
+import { Form } from "@/components/ui/form"
+import { Textarea } from "@/components/ui/textarea"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { DatePicker } from "@/components/ui/date-picker";
-import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { personalInfoSchema } from "@/types/onboarding.types";
-import { Input } from "@/components/ui/my-custom";
+} from "@/components/ui/select"
+import { DatePicker } from "@/components/ui/date-picker"
+import type { StepComponentProps } from "@/components/multi-step-form/types"
+import type { personalInfoSchema } from "@/types/onboarding.types"
+import { Input } from "@/components/ui/customInput"
 
 export function PersonalInformationForm({
   form,
@@ -29,13 +29,13 @@ export function PersonalInformationForm({
     watch,
     setValue,
     handleSubmit,
-  } = form;
+  } = form
 
   // Handle file input
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    setValue("image", file ? file.name : "");
-  };
+    const file = e.target.files?.[0]
+    setValue("image", file ? file.name : "")
+  }
 
   return (
     <div className="space-y-6">
@@ -90,9 +90,7 @@ export function PersonalInformationForm({
                 </SelectContent>
               </Select>
               {errors.gender && (
-                <p className="text-sm text-red-500 mt-1">
-                  {errors.gender.message?.toString()}
-                </p>
+                <p className="text-sm text-red-500 mt-1">{errors.gender.message?.toString()}</p>
               )}
             </div>
           </div>
@@ -125,17 +123,15 @@ export function PersonalInformationForm({
             <Textarea
               placeholder="Enter your full address"
               {...register("address")}
-              className={errors.address ? "border-red-500" : ""}
+              className={`bg-white ${errors.address && "border-red-500"}`}
             />
             {errors.address && (
-              <p className="text-sm text-red-500 mt-1">
-                {errors.address.message?.toString()}
-              </p>
+              <p className="text-sm text-red-500 mt-1">{errors.address.message?.toString()}</p>
             )}
           </div>
 
-          <div>
-            <p className="text-lg font-medium pb-3">Emergency Contact</p>
+          <div className="border-t border-gray-200 pt-4">
+            <p className="text-base font-medium pb-3">Emergency Contact</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 label="Person Name"
@@ -160,5 +156,5 @@ export function PersonalInformationForm({
         </form>
       </Form>
     </div>
-  );
+  )
 }

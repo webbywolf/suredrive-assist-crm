@@ -1,5 +1,5 @@
-"use client";
-import { Button } from "@/components/ui/button";
+"use client"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -7,18 +7,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/my-custom";
-import type { StepComponentProps } from "@/components/multi-step-form/types";
-import type { workExperienceSchema } from "@/types/onboarding.types";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Textarea } from "@/components/ui/textarea";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/customInput"
+import type { StepComponentProps } from "@/components/multi-step-form/types"
+import type { workExperienceSchema } from "@/types/onboarding.types"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Textarea } from "@/components/ui/textarea"
 
 const experience = [
   { id: 1, label: "Fresher" },
   { id: 2, label: "Experienced" },
   { id: 3, label: "Intern" },
-];
+]
 
 export function WorkExperienceForm({
   form,
@@ -26,7 +26,7 @@ export function WorkExperienceForm({
   onPrevious,
   isLastStep,
 }: StepComponentProps<typeof workExperienceSchema>) {
-  const isExperienced = Number(form.watch("experience")) === 2;
+  const isExperienced = Number(form.watch("experience")) === 2
   return (
     <div className="space-y-6">
       <Form {...form}>
@@ -43,10 +43,7 @@ export function WorkExperienceForm({
                       className="border-gray-600"
                       checked={form.watch("experience") === item.id}
                       onCheckedChange={(checked) => {
-                        form.setValue(
-                          "experience",
-                          checked ? item.id : undefined,
-                        );
+                        form.setValue("experience", checked ? item.id : undefined)
                       }}
                     />
                     <label>{item.label}</label>
@@ -62,8 +59,8 @@ export function WorkExperienceForm({
               accept=".pdf"
               label="Upload Resume"
               onChange={(e) => {
-                const file = e.target.files?.[0];
-                form.setValue("image", file ? file.name : "");
+                const file = e.target.files?.[0]
+                form.setValue("image", file ? file.name : "")
               }}
             />
 
@@ -73,8 +70,8 @@ export function WorkExperienceForm({
                 accept=".pdf"
                 label="Upload Relieving Letter"
                 onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  form.setValue("image", file ? file.name : "");
+                  const file = e.target.files?.[0]
+                  form.setValue("image", file ? file.name : "")
                 }}
               />
             )}
@@ -114,10 +111,7 @@ export function WorkExperienceForm({
             <p className="text-lg pb-3">Reference</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-center gap-2">
-                <Checkbox
-                  className="border-gray-600"
-                  {...form.register("reference")}
-                />
+                <Checkbox className="border-gray-600" {...form.register("reference")} />
                 <label>Have Reference</label>
               </div>
             </div>
@@ -134,8 +128,8 @@ export function WorkExperienceForm({
                 accept=".png,.jpg,.jpeg"
                 label="Upload Reference Letter"
                 onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  form.setValue("refLetter", file ? file.name : "");
+                  const file = e.target.files?.[0]
+                  form.setValue("refLetter", file ? file.name : "")
                 }}
               />
             </div>
@@ -143,5 +137,5 @@ export function WorkExperienceForm({
         </form>
       </Form>
     </div>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { z } from "zod"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -9,32 +9,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/my-custom";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/customInput"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import type { StepComponentProps } from "@/components/multi-step-form/types";
+} from "@/components/ui/select"
+import type { StepComponentProps } from "@/components/multi-step-form/types"
 
 const governmentDetailsSchema = z.object({
   idType: z.string({ required_error: "Please select an ID type." }),
-  idNumber: z
-    .string()
-    .min(5, { message: "ID number must be at least 5 characters." }),
-  taxId: z
-    .string()
-    .min(5, { message: "Tax ID must be at least 5 characters." }),
-  nationality: z
-    .string()
-    .min(2, { message: "Nationality must be at least 2 characters." }),
-});
+  idNumber: z.string().min(5, { message: "ID number must be at least 5 characters." }),
+  taxId: z.string().min(5, { message: "Tax ID must be at least 5 characters." }),
+  nationality: z.string().min(2, { message: "Nationality must be at least 2 characters." }),
+})
 
-export type GovernmentDetailsSchema = z.infer<typeof governmentDetailsSchema>;
-export const governmentDetailsFormSchema = governmentDetailsSchema;
+export type GovernmentDetailsSchema = z.infer<typeof governmentDetailsSchema>
+export const governmentDetailsFormSchema = governmentDetailsSchema
 
 export function GovernmentDetailsForm({
   form,
@@ -64,9 +58,7 @@ export function GovernmentDetailsForm({
                 <SelectContent>
                   <SelectItem value="aadhar">Adhaar Card</SelectItem>
                   <SelectItem value="passport">Passport</SelectItem>
-                  <SelectItem value="driving-license">
-                    Driving License
-                  </SelectItem>
+                  <SelectItem value="driving-license">Driving License</SelectItem>
                   <SelectItem value="national-id">National ID</SelectItem>
                   <SelectItem value="voter-id">Voter ID</SelectItem>
                 </SelectContent>
@@ -98,9 +90,7 @@ export function GovernmentDetailsForm({
               label="Nationality"
               placeholder="Enter nationality"
               {...form.register("nationality")}
-              className={
-                form.formState.errors.nationality ? "border-red-500" : ""
-              }
+              className={form.formState.errors.nationality ? "border-red-500" : ""}
             />
           </div>
 
@@ -115,5 +105,5 @@ export function GovernmentDetailsForm({
         </form>
       </Form>
     </div>
-  );
+  )
 }
