@@ -24,7 +24,12 @@ import {
   IdCard,
   NotebookTabs,
   Settings,
-} from "lucide-react";
+  Building2,
+  User2,
+  Users,
+  ListCheck,
+  SquareCheck,
+} from "lucide-react"
 
 export const navList = [
   {
@@ -35,38 +40,61 @@ export const navList = [
   },
   {
     id: 2,
-    name: "User & Permission",
-    icon: ShieldCheck,
-    path: "/admin",
+    name: "Employees",
+    icon: Users,
+    path: "/employees",
     submenu: [
       {
         id: 1,
-        name: "add",
-        path: "/admin/add",
+        name: "Add",
+        path: "/employees/onboarding",
       },
       {
         id: 2,
-        name: "all users",
-        path: "/admin/alluser",
+        name: "View All Employees",
+        path: "/employees",
       },
     ],
   },
 
   {
-    id: 3,
-    name: "Partners",
-    icon: Handshake,
-    path: "/student",
+    id: 7,
+    name: "Approvals",
+    icon: SquareCheck,
+    path: "/approvals",
     submenu: [
       {
         id: 1,
-        name: "add",
-        path: "/partner/add",
+        name: "Employee",
+        path: "/approvals/users",
       },
       {
         id: 2,
-        name: "All",
-        path: "/student/all",
+        name: "Payments",
+        path: "/approvals/payments",
+      },
+      {
+        id: 3,
+        name: "Service Escalation",
+        path: "/approvals/services",
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "Partners",
+    icon: Handshake,
+    path: "/partners",
+    submenu: [
+      {
+        id: 1,
+        name: "Onboarding",
+        path: "/partners/onboarding",
+      },
+      {
+        id: 2,
+        name: "View All Partners",
+        path: "/partners/all",
       },
     ],
   },
@@ -77,19 +105,41 @@ export const navList = [
     path: "/book",
     submenu: [
       {
-        name: "add",
-        path: "/Service/add",
+        name: "Add",
+        path: "/services/add",
       },
       {
-        name: "All",
-        path: "/Service/all",
+        name: "View All Services",
+        path: "/services/all",
       },
     ],
   },
   {
     id: 5,
-    name: "Permissions",
+    name: "Roles & Permissions",
     icon: Settings,
-    path: "/permissions",
+    path: "/roles-permissions",
+    submenu: [
+      {
+        name: "Departments",
+        path: "/roles-permissions/departments",
+      },
+      {
+        name: "Roles",
+        path: "/roles-permissions/roles",
+      },
+      {
+        name: "Permissions",
+        path: "/roles-permissions/permissions",
+      },
+      {
+        name: "Assign Roles",
+        path: "/roles-permissions/assign-roles",
+      },
+      {
+        name: "Manage Access",
+        path: "/roles-permissions/manage-access",
+      },
+    ],
   },
-];
+]

@@ -1,13 +1,15 @@
-import React from "react";
-import Sidebar from "@/components/Sidebar";
+import React from "react"
+import Sidebar from "@/components/Sidebar"
+import { cn } from "@/lib/utils"
+import Header from "@/components/Header"
 
 const Dashboard = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="grid grid-cols-[240px_1fr] w-full h-screen">
+    <div className="w-full h-dvh grid grid-cols-[240px_1fr] overflow-hidden">
       <Sidebar />
-      <section className="bg-gray-50">{children}</section>
-    </main>
-  );
-};
+      {children}
+    </div>
+  )
+}
 
-export default Dashboard;
+export default Dashboard

@@ -1,0 +1,210 @@
+"use client";
+import React from "react";
+import { DataTable } from "@/components/table/DataTable";
+import { ColumnDef } from "@tanstack/react-table";
+import {
+  ArrowUpDown,
+  Delete,
+  Edit,
+  EllipsisVertical,
+  Pencil,
+  Trash2,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { cn } from "@/lib/utils";
+import UserPermission from "@/sections/user-permission/permission";
+
+export interface User {
+  id: string;
+  name: string;
+  role: string;
+  status: string;
+}
+
+const tableData: User[] = [
+  {
+    id: "SDA-001",
+    name: "John Doe",
+    role: "Maintainer",
+    status: "Active",
+  },
+  {
+    id: "SDA-002",
+    name: "Jane Smith",
+    role: "Subscriber",
+    status: "Inactive",
+  },
+  {
+    id: "SDA-003",
+    name: "Michael Johnson",
+    role: "Editor",
+    status: "Inactive",
+  },
+  {
+    id: "SDA-004",
+    name: "Emily Brown",
+    role: "Author",
+    status: "Active",
+  },
+  {
+    id: "SDA-005",
+    name: "Daniel White",
+    role: "Subscriber",
+    status: "Pending",
+  },
+  {
+    id: "SDA-006",
+    name: "Sarah Miller",
+    role: "Admin",
+    status: "Active",
+  },
+  {
+    id: "SDA-007",
+    name: "James Wilson",
+    role: "Author",
+    status: "Pending",
+  },
+  {
+    id: "SDA-008",
+    name: "Olivia Martinez",
+    role: "Maintainer",
+    status: "Pending",
+  },
+  {
+    id: "SDA-009",
+    name: "William Davis",
+    role: "Maintainer",
+    status: "Pending",
+  },
+  {
+    id: "SDA-010",
+    name: "Sophia Anderson",
+    role: "Admin",
+    status: "Inactive",
+  },
+  {
+    id: "SDA-011",
+    name: "Benjamin Thomas",
+    role: "Author",
+    status: "Active",
+  },
+  {
+    id: "SDA-012",
+    name: "Charlotte Harris",
+    role: "Subscriber",
+    status: "Pending",
+  },
+  {
+    id: "SDA-013",
+    name: "Liam Martin",
+    role: "Admin",
+    status: "Active",
+  },
+  {
+    id: "SDA-014",
+    name: "Amelia Thompson",
+    role: "Editor",
+    status: "Pending",
+  },
+  {
+    id: "SDA-015",
+    name: "Noah Garcia",
+    role: "Subscriber",
+    status: "Inactive",
+  },
+];
+
+export default function AllUsersTable() {
+  return (
+    <DataTable
+      columns={columns}
+      data={tableData}
+      filterOptions={{ label: "Employee ID", value: "id" }}
+      paginationOption
+    />
+  );
+}
+
+const columns: ColumnDef<User>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: "id",
+    header: () => <div className=" uppercase">employee id</div>,
+    cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
+  },
+  ,
+  {
+    accessorKey: "name",
+    header: () => <div className=" uppercase">name</div>,
+    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
+  },
+  {
+    accessorKey: "role",
+    header: () => <div className=" uppercase">Role</div>,
+    cell: ({ row }) => <div className="capitalize">{row.getValue("role")}</div>,
+  },
+  {
+    accessorKey: "status",
+    header: () => <div className=" uppercase ">status</div>,
+    cell: ({ row }) => (
+      <div
+        className={cn(
+          "capitalize div-center  border border-gray-300 bg-white rounded-full w-20 text-center p-1.5 text-[12px] ",
+          { "bg-green-700 text-white": row.getValue("status") === "Active" },
+          { "bg-amber-500 text-white": row.getValue("status") !== "Active" },
+        )}
+      >
+        {row.getValue("status")}
+      </div>
+    ),
+  },
+
+  {
+    id: "actions",
+    header: () => <div className="text-right uppercase pr-6">Actions</div>,
+    cell: ({ row }) => {
+      return (
+        <div className="flex gap-2 justify-end pr-3">
+          <div className="flex gap-2">
+            <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
+              <Trash2 size={20} />
+            </button>
+            <UserPermission
+              empId={row.getValue("id")}
+              empName={row.getValue("name")}
+            >
+              <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
+                <Pencil size={20} />
+              </button>
+            </UserPermission>
+          </div>
+          {/* <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
+            <EllipsisVertical size={20} />
+          </button> */}
+        </div>
+      );
+    },
+  },
+];
