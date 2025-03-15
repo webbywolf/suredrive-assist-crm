@@ -1,4 +1,4 @@
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page() {
   return null
   // const slug = (await params).slug
   // if (slug === "roles") {
