@@ -29,7 +29,7 @@ import {
   Users,
   ListCheck,
   SquareCheck,
-} from "lucide-react"
+} from "lucide-react";
 
 export const navList = [
   {
@@ -52,7 +52,7 @@ export const navList = [
       {
         id: 2,
         name: "View All Employees",
-        path: "/employees",
+        path: "/employees/all",
       },
     ],
   },
@@ -142,4 +142,4 @@ export const navList = [
       },
     ],
   },
-]
+];

@@ -1,10 +1,17 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, Delete, Edit, EllipsisVertical, Pencil, Trash2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { cn } from "@/lib/utils"
+import { ColumnDef } from "@tanstack/react-table";
+import {
+  ArrowUpDown,
+  Delete,
+  Edit,
+  EllipsisVertical,
+  Pencil,
+  Trash2,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { cn } from "@/lib/utils";
 
 export const columns: ColumnDef<Partners>[] = [
   {
@@ -12,7 +19,8 @@ export const columns: ColumnDef<Partners>[] = [
     header: ({ table }) => (
       <Checkbox
         checked={
-          table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -31,12 +39,16 @@ export const columns: ColumnDef<Partners>[] = [
   {
     accessorKey: "dealership",
     header: () => <div className=" uppercase">dealership</div>,
-    cell: ({ row }) => <div className="capitalize">{row.getValue("dealership")}</div>,
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("dealership")}</div>
+    ),
   },
   {
     accessorKey: "contactPerson",
     header: () => <div className=" uppercase">Contact Person</div>,
-    cell: ({ row }) => <div className="capitalize">{row.getValue("contactPerson")}</div>,
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("contactPerson")}</div>
+    ),
   },
   {
     accessorKey: "status",
@@ -46,7 +58,7 @@ export const columns: ColumnDef<Partners>[] = [
         className={cn(
           "capitalize border border-gray-300 bg-white rounded-full w-20 text-center p-1.5 text-[12px] ",
           { "bg-green-700 text-white": row.getValue("status") === "Active" },
-          { "bg-amber-500 text-white": row.getValue("status") !== "Active" }
+          { "bg-amber-500 text-white": row.getValue("status") !== "Active" },
         )}
       >
         {row.getValue("status")}
@@ -69,18 +81,22 @@ export const columns: ColumnDef<Partners>[] = [
     //     </Button>
     //   )
     // },
-    cell: ({ row }) => <div className="capitalize text-center">{row.getValue("totalSales")}</div>,
+    cell: ({ row }) => (
+      <div className="capitalize text-center">{row.getValue("totalSales")}</div>
+    ),
   },
   {
     accessorKey: "createdAt",
     header: () => <div className="text-center uppercase">Created At</div>,
-    cell: ({ row }) => <div className="capitalize text-center">{row.getValue("createdAt")}</div>,
+    cell: ({ row }) => (
+      <div className="capitalize text-center">{row.getValue("createdAt")}</div>
+    ),
   },
   {
     id: "actions",
     header: () => <div className="text-right uppercase pr-6">Actions</div>,
     cell: ({ row }) => {
-      console.log(row)
+      // console.log(row)
 
       return (
         <div className="flex gap-2 justify-end pr-3">
@@ -96,7 +112,7 @@ export const columns: ColumnDef<Partners>[] = [
             <EllipsisVertical size={20} />
           </button>
         </div>
-      )
+      );
     },
   },
-]
+];

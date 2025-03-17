@@ -21,6 +21,7 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { navList } from "@/constant/nav"
 import Image from "next/image"
+import LogoutButton from "./LogoutButton"
 
 const Sidebar = () => {
   const isCollapsed = false
@@ -33,16 +34,7 @@ const Sidebar = () => {
 
       {/* Sidebar Footer */}
       <div className="p-3 border-t border-gray-200">
-        <button
-          className={cn(`w-full px-4 py-3 flex items-center rounded-md cursor-pointer`, {
-            "justify-center hover:bg-gray-200": isCollapsed,
-            "hover:bg-gray-100": !isCollapsed,
-          })}
-          // onClick={handleLogout}
-        >
-          <LogOut size={20} />
-          {!isCollapsed && <span className="ml-3">Logout</span>}
-        </button>
+        <LogoutButton />
       </div>
     </aside>
   )

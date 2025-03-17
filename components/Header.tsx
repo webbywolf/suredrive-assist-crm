@@ -1,6 +1,6 @@
+'use client'
 import React from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -10,8 +10,13 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu"
 import { Bell } from "lucide-react"
-
+import { useFetchEmployee } from "@/queries/authQueries";
+import { Skeleton } from "@/components/ui/skeleton";
 const Header = ({ title }: { title?: string }) => {
+  const { data, error, isLoading } = useFetchEmployee();
+  console.log('data :',data);
+  console.log('error :',error);
+
   return (
     <header className="w-full h-full bg-gray-100 flex items-center border-b border-border px-6 py-2">
       <nav className="h-full w-full flex justify-between items-center ">
@@ -39,8 +44,10 @@ const Header = ({ title }: { title?: string }) => {
           </DropdownMenu>
 
           <div className="flex justify-center items-center cursor-pointer px-3 h-full border border-gray-200 bg-white gap-2 rounded-md">
-            <div>
-              <p className="text-sm text-gray-600 font-medium">Diwakar</p>
+            <div className="flex flex-col">
+              {isLoading ? <Skeleton className="w-[90px] h-[20px] bg-gray-200 rounded-md" />: <p className="text-[12px] text-gray-600 font-medium">{data?.employee.name}</p>}
+              <span className="text-[9px] text-gray-500 text-right inline-block">ID: {data?.employee.employee_id}</span>
+              
             </div>
             <Avatar className="size-6.5">
               <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />

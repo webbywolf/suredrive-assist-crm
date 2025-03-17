@@ -1,20 +1,21 @@
-"use client"
+"use client";
 
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import { Form } from "@/components/ui/form"
-import { Textarea } from "@/components/ui/textarea"
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { DatePicker } from "@/components/ui/date-picker"
-import type { StepComponentProps } from "@/components/multi-step-form/types"
-import type { personalInfoSchema } from "@/types/onboarding.types"
-import { Input } from "@/components/ui/customInput"
+} from "@/components/ui/select";
+import { DatePicker } from "@/components/ui/date-picker";
+import type { StepComponentProps } from "@/components/multi-step-form/types";
+import type { personalInfoSchema } from "@/types/onboarding.types";
+import { ErrorLabel, Input } from "@/components/ui/customInput";
+import dayjs, { Dayjs } from "dayjs";
 
 export function PersonalInformationForm({
   form,
@@ -22,20 +23,39 @@ export function PersonalInformationForm({
   isLastStep,
   onPrevious,
 }: StepComponentProps<typeof personalInfoSchema>) {
-  // Get form values and errors
   const {
     register,
     formState: { errors },
-    watch,
+    getValues,
     setValue,
-    handleSubmit,
-  } = form
+    watch,
+    trigger,
+  } = form;
 
-  // Handle file input
+  // console.log("Form Values:", getValues());
+  // console.log("Form Errors:", errors);
+
+  const handleDateChange = (date: Dayjs | null) => {
+    if (date) {
+      setValue("dateOfBirth", date.toDate());
+    }
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    setValue("image", file ? file.name : "")
-  }
+    const file = e.target.files?.[0];
+    if (file) {
+      if (
+        file.size <= 5000000 &&
+        ["image/jpeg", "image/jpg", "image/png"].includes(file.type)
+      ) {
+        setValue("image", file);
+      } else {
+        // Handle invalid file
+        e.target.value = "";
+        alert("Please upload an image file (JPG/PNG) less than 5MB");
+      }
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -45,30 +65,33 @@ export function PersonalInformationForm({
             <Input
               label="First Name"
               placeholder="Enter Name"
-              // {...register("name")}
-              // className={errors.name ? "border-red-500" : ""}
+              required
+              {...register("firstName")}
+              autoFocus={true}
+              error={errors.firstName?.message}
             />
             <Input
               label="Last Name"
               placeholder="Sharma"
+              required
               {...register("lastName")}
-              className={errors.lastName ? "border-red-500" : ""}
+              error={errors.lastName?.message}
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <DatePicker
-                name="start"
+                name="dateOfBirth"
                 label="Date of Birth"
-                // @ts-ignore
-                value={form.start}
-                // onChange={handleStartDateChange}
+                value={
+                  watch("dateOfBirth") ? dayjs(watch("dateOfBirth")) : null
+                }
+                onChange={handleDateChange}
               />
+
               {errors.dateOfBirth && (
-                <p className="text-sm text-red-500 mt-1">
-                  {errors.dateOfBirth.message?.toString()}
-                </p>
+                <ErrorLabel> {errors.dateOfBirth?.message} </ErrorLabel>
               )}
             </div>
 
@@ -77,7 +100,9 @@ export function PersonalInformationForm({
                 Gender
               </label>
               <Select
-                onValueChange={(value) => setValue("gender", value)}
+                onValueChange={(value: "male" | "female" | "other") =>
+                  setValue("gender", value)
+                }
                 defaultValue={watch("gender")}
               >
                 <SelectTrigger className="cursor-pointer">
@@ -90,29 +115,34 @@ export function PersonalInformationForm({
                 </SelectContent>
               </Select>
               {errors.gender && (
-                <p className="text-sm text-red-500 mt-1">{errors.gender.message?.toString()}</p>
+                <ErrorLabel>{errors.gender.message?.toString()}</ErrorLabel>
               )}
             </div>
           </div>
+
           <Input
             label="Upload Image"
             type="file"
             accept=".png,.jpg,.jpeg"
+            required
             onChange={handleFileChange}
+            error={errors.image?.message}
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
               label="Contact Number"
-              placeholder="+91 9876543210"
+              placeholder="9876543210"
+              required
               {...register("contactNumber")}
-              className={errors.contactNumber ? "border-red-500" : ""}
+              error={errors.contactNumber?.message}
             />
             <Input
               label="Personal Email"
               placeholder="abhi.sharma@example.com"
+              required
               {...register("email")}
-              className={errors.email ? "border-red-500" : ""}
+              error={errors.email?.message}
             />
           </div>
 
@@ -122,11 +152,12 @@ export function PersonalInformationForm({
             </label>
             <Textarea
               placeholder="Enter your full address"
+              required
               {...register("address")}
-              className={`bg-white ${errors.address && "border-red-500"}`}
+              className="bg-white"
             />
             {errors.address && (
-              <p className="text-sm text-red-500 mt-1">{errors.address.message?.toString()}</p>
+              <ErrorLabel>{errors.address.message?.toString()}</ErrorLabel>
             )}
           </div>
 
@@ -136,25 +167,28 @@ export function PersonalInformationForm({
               <Input
                 label="Person Name"
                 placeholder="Ashok Kumar"
+                required
                 {...register("emergencyName")}
-                className={errors.emergencyName ? "border-red-500" : ""}
+                error={errors.emergencyName?.message}
               />
               <Input
                 label="Contact Number"
-                placeholder="+91 9876543210"
+                placeholder="9876543210"
+                required
                 {...register("emergencyNumber")}
-                className={errors.emergencyNumber ? "border-red-500" : ""}
+                error={errors.emergencyNumber?.message}
               />
               <Input
                 label="Relationship"
                 placeholder="Father"
+                required
                 {...register("emergencyRelation")}
-                className={errors.emergencyRelation ? "border-red-500" : ""}
+                error={errors.emergencyRelation?.message}
               />
             </div>
           </div>
         </form>
       </Form>
     </div>
-  )
+  );
 }
