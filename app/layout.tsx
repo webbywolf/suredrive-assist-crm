@@ -1,6 +1,10 @@
 import type { Metadata } from "next"
 import { Open_Sans } from "next/font/google"
 import "./globals.css"
+import TanstackProvider from "@/context/TanstackProvider"
+
+
+
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -27,7 +31,11 @@ export default function RootLayout({
         className={`${openSans.className} text-gray-800 antialiased overflow-hidden`}
         suppressHydrationWarning={true}
       >
+            
+      <TanstackProvider>
         {children}
+        </TanstackProvider>
+        
       </body>
     </html>
   )

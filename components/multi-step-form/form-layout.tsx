@@ -21,6 +21,16 @@ export function FormLayout({
   const isFirstStep = currentStepIndex === 0;
 
   const { nextStep, previousStep } = useMultiStepFormStore();
+  const handleNextClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    // trigger form onNext
+    const form = document.querySelector("form");
+    if (form) {
+      form.dispatchEvent(
+        new Event("submit", { cancelable: true, bubbles: true }),
+      );
+    }
+  };
 
   return (
     <div className="w-full h-full rounded-md flex overflow-hidden border border-border shadow-box">
@@ -37,20 +47,16 @@ export function FormLayout({
         <div className="flex-1 p-6 bg-[#fafafa] overflow-auto">{children}</div>
         <div className="h-[70px] px-6 flex gap-3 bg-white items-center border-t border-border py-2">
           {isLastStep ? (
-            <Button type="submit" variant="brand" onClick={onSubmit}>
+            <Button type="submit" onClick={onSubmit} variant="brand">
               Submit
             </Button>
           ) : (
-            <Button type="button" variant="brand" onClick={nextStep}>
+            <Button type="submit" variant="brand" onClick={handleNextClick}>
               Next <ArrowRight />
             </Button>
           )}
           {!isFirstStep && (
-            <Button
-              type="button"
-              variant="outline"
-              onClick={previousStep} // Call onPrevious
-            >
+            <Button type="button" variant="outline" onClick={previousStep}>
               Previous
             </Button>
           )}
