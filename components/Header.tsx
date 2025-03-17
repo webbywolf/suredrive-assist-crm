@@ -14,8 +14,7 @@ import { useFetchEmployee } from "@/queries/authQueries";
 import { Skeleton } from "@/components/ui/skeleton";
 const Header = ({ title }: { title?: string }) => {
   const { data, error, isLoading } = useFetchEmployee();
-  console.log('data :',data);
-  console.log('error :',error);
+  
 
   return (
     <header className="w-full h-full bg-gray-100 flex items-center border-b border-border px-6 py-2">
