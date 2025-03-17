@@ -21,10 +21,14 @@ export const CustomCard: React.FC<CardProps> = ({
         className,
       )}
     >
-      <span className="text-sm text-gray-700 inline-block">{title}</span>
-      <p className={cn("text-3xl font-semibold py-2", contentClass)}>
-        {content}
-      </p>
+      {title && (
+        <span className="text-sm text-gray-700 inline-block">{title}</span>
+      )}
+      {content && (
+        <p className={cn("text-3xl font-semibold py-2", contentClass)}>
+          {content}
+        </p>
+      )}
       {children}
     </div>
   );
