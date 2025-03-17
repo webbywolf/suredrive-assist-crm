@@ -105,7 +105,7 @@ export default function AddRole({}) {
       {/* Button to open the dialog */}
 
       <Button
-        onClick={handleOpenDialog}
+        // onClick={handleOpenDialog}
         className="bg-brand-secondary text-white hover:bg-brand-secondary/90 hover:shadow-md w-full"
       >
         Add New Role <PlusIcon />

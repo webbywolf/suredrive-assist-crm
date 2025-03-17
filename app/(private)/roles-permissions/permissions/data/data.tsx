@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
-import UserPermission from "@/sections/user-permission/permission";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -88,11 +87,11 @@ export default function AllPermissionsTable() {
   );
 }
 
-function AddPermission() {
+export function AddPermission() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className="h-10.5">
           <Plus /> Add Permission
         </Button>
       </DialogTrigger>
@@ -134,7 +133,7 @@ function AddPermission() {
   );
 }
 
-const EditPermission = ({ children }: { children: React.ReactNode }) => {
+export const EditPermission = ({ children }: { children: React.ReactNode }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>

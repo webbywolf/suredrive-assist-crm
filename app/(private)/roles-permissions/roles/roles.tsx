@@ -45,16 +45,16 @@ interface RolesCardProps {
 
 const AddNewRole = () => {
   return (
-    <div className="grid grid-cols-2 shadow-[0px_5px_15px_5px_rgba(0,0,0,0.1)] bg-white pt-8 p-6 pb-0 rounded-md">
-      <div>
-        <UserRoundPlus size={80} />
-      </div>
-      <div>
+    <CustomCard className="flex flex-row justify-between items-center">
+      <div className="w-[60%] ">
         <AddRole />
-        <p className="mb-5 text-[15px] text-muted-foreground mt-3">
+        <p className="mt-1 text-[15px] text-muted-foreground">
           Add new role, if it doesn't exist.
         </p>
       </div>
-    </div>
+      <div>
+        <UserRoundPlus size={80} />
+      </div>
+    </CustomCard>
   );
 };
