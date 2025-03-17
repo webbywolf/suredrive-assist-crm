@@ -133,7 +133,7 @@ export function StepOne({
             </label>
             <Textarea
               placeholder="Enter company's full address"
-              className="min-h-[100px]"
+              className="min-h-[100px] mt-1"
               {...form.register("fullAddress")}
             />
             <ErrorLabel>

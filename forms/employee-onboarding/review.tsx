@@ -115,7 +115,10 @@ export function ReviewForm({
         <div className="space-y-3">
           <h3 className="text-lg font-medium border-b pb-2">PF/ESI Details</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <LabelAndValue label="UAN Number" value={formData.uanNumber} />
+            <LabelAndValue
+              label="UAN Number"
+              value={formData.uanNumber as string}
+            />
             <LabelAndValue
               label="UAN Card"
               value={formData.uanCard ? "Uploaded" : "Not Uploaded"}

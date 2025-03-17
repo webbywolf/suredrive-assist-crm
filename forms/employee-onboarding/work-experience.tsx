@@ -1,12 +1,4 @@
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import { ErrorLabel, Input } from "@/components/ui/customInput";
 import type { StepComponentProps } from "@/components/multi-step-form/types";
 import type { workExperienceSchema } from "@/types/onboarding.types";
@@ -27,8 +19,6 @@ const experience: Experience[] = [
 export function WorkExperienceForm({
   form,
   onNext,
-  onPrevious,
-  isLastStep,
 }: StepComponentProps<typeof workExperienceSchema>) {
   const isExperienced = form.watch("experienceType") === experience[1].id;
   const hasReference = form.watch("hasReference");
@@ -51,7 +41,9 @@ export function WorkExperienceForm({
                       className="border-gray-600"
                       checked={form.watch("experienceType") === item.id}
                       onCheckedChange={() => {
-                        form.setValue("experienceType", item.id);
+                        form.setValue("experienceType", item.id, {
+                          shouldValidate: true,
+                        });
                       }}
                     />
                     <label>{item.label}</label>
@@ -73,6 +65,7 @@ export function WorkExperienceForm({
               error={form.formState.errors.resume?.message}
               onChange={(e) => {
                 const file = e.target.files?.[0] || null;
+                if (!file) return;
                 form.setValue("resume", file);
               }}
             />
@@ -85,6 +78,7 @@ export function WorkExperienceForm({
                 error={form.formState.errors.relievingLetter?.message}
                 onChange={(e) => {
                   const file = e.target.files?.[0] || null;
+                  if (!file) return;
                   form.setValue("relievingLetter", file);
                 }}
               />
@@ -139,7 +133,17 @@ export function WorkExperienceForm({
                   className="border-gray-600"
                   checked={hasReference}
                   onCheckedChange={(checked) => {
-                    form.setValue("hasReference", Boolean(checked));
+                    if (!checked) {
+                      form.setValue("referenceName", undefined, {
+                        shouldValidate: true,
+                      });
+                      form.setValue("referenceLetter", null, {
+                        shouldValidate: true,
+                      });
+                    }
+                    form.setValue("hasReference", Boolean(checked), {
+                      shouldValidate: true,
+                    });
                   }}
                 />
                 <label>Have Reference</label>
