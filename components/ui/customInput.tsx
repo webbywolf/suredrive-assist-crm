@@ -1,19 +1,18 @@
-"use client";
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import { EyeIcon, EyeOff } from "lucide-react";
+"use client"
+import * as React from "react"
+import { cn } from "@/lib/utils"
+import { EyeIcon, EyeOff } from "lucide-react"
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  prefix?: string;
-  icon?: string;
-  error?: string | undefined;
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string
+  prefix?: string
+  icon?: string
+  error?: string
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, type, error, ...props }, ref) => {
-    const [show, setShow] = React.useState(false);
+    const [show, setShow] = React.useState(false)
 
     return (
       <div className={cn(`relative select-none`, className)}>
@@ -29,13 +28,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className,
             {
               "!bg-white file:": type === "file",
-              "border-red-500": error,
-            },
+            }
           )}
           ref={ref}
           {...props}
         />
-        {error && <p className="text-[12px] text-red-500 mt-1 ">{error}</p>}
         {type === "password" && (
           <div
             className="absolute top-10 right-4 text-slate-600 cursor-pointer hover:text-brand"
@@ -45,40 +42,27 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           </div>
         )}
       </div>
-    );
-  },
-);
-Input.displayName = "Input";
+    )
+  }
+)
+Input.displayName = "Input"
 
-export { Input };
+export { Input }
 
-export const LabelAndValue = ({
-  label,
-  value,
-  ...rest
-}: {
-  label: string;
-  value: string;
-}) => {
+export const LabelAndValue = ({ label, value, ...rest }: { label: string; value: string }) => {
   return (
     <div className="div" {...rest}>
-      <p className="text-sm text-muted-foreground font-noraml mb-1 capitalize">
-        {label}
-      </p>
+      <p className="text-sm text-muted-foreground font-noraml mb-1 capitalize">{label}</p>
       <p
         className={cn(
           `text-sm text-slate-800 font-medium capitalize text-ellipsis overflow-hidden`,
           {
             "normal-case": label === "username" || label === "email",
-          },
+          }
         )}
       >
         {value ?? "Not Provided"}
       </p>
     </div>
-  );
-};
-
-export const ErrorLabel = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-[12px] text-red-500 mt-1 ">{children}</p>;
-};
+  )
+}

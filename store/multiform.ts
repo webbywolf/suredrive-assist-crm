@@ -9,7 +9,6 @@ interface MultiStepFormState {
   setFormData: (data: Record<string, any>) => void;
   updateFormData: (data: Record<string, any>) => void;
   reset: () => void;
-  resetStep: () => void;
 }
 
 export const useMultiStepFormStore = create<MultiStepFormState>((set) => ({
@@ -26,5 +25,4 @@ export const useMultiStepFormStore = create<MultiStepFormState>((set) => ({
   updateFormData: (data) =>
     set((state) => ({ formData: { ...state.formData, ...data } })),
   reset: () => set({ currentStepIndex: 0, formData: {} }),
-  resetStep: () => set({ currentStepIndex: 0 }),
 }));

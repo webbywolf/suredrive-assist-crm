@@ -1,19 +1,14 @@
-import { Metadata } from "next";
-import React from "react";
-import Data from "./data/data";
-import Page from "@/components/layouts/Page";
+import { Metadata } from "next"
+import React from "react"
+import Data from "./data"
 
 export const metadata: Metadata = {
   title: "Partners",
   description: "Partners",
-};
+}
 
 const page = () => {
-  return (
-    <Page title="Partners List">
-      <Data />
-    </Page>
-  );
-};
+  return <Data />
+}
 
-export default page;
+export default page
