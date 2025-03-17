@@ -27,8 +27,9 @@ export const personalInfoSchema = z.object({
   }),
   contactNumber: z
     .string()
-    .regex(/^\+?[1-9]\d{9,14}$/, "Please enter a valid contact number")
-    .min(10, "Contact number must be at least 10 digits"),
+    .min(10, "Phone number must be at least 10 digits long")
+    .max(10, "Phone number must be at most 10 digits long")
+    .regex(/^\d+$/, "Phone number must contain only digits"),
   email: z
     .string()
     .email("Please enter a valid email address")
@@ -55,7 +56,6 @@ export const personalInfoSchema = z.object({
       "Only .jpg, .jpeg, and .png formats are supported",
     )
     .nullable(),
-  // Emergency Contact
   emergencyName: z
     .string()
     .min(2, "Emergency contact name must be at least 2 characters")
@@ -67,19 +67,13 @@ export const personalInfoSchema = z.object({
     .max(30, "Relationship cannot exceed 30 characters"),
   emergencyNumber: z
     .string()
-    .regex(
-      /^\+?[1-9]\d{9,14}$/,
-      "Please enter a valid emergency contact number",
-    )
-    .min(10, "Emergency contact number must be at least 10 digits"),
+    .min(10, "Phone number must be at least 10 digits long")
+    .max(10, "Phone number must be at most 10 digits long")
+    .regex(/^\d+$/, "Phone number must contain only digits"),
 });
 
-// Legal Details Schema
 export const legalDetailsSchema = z.object({
-  pan: z
-    .string()
-    .length(10, "PAN must be exactly 10 characters")
-    .regex(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, "Invalid PAN format"),
+  pan: z.string().length(7, "PAN must be greater than 7 characters"),
   aadharNumber: z
     .string()
     .length(12, "Aadhar number must be exactly 12 digits")
@@ -98,10 +92,7 @@ export const legalDetailsSchema = z.object({
     .string()
     .min(3, "Bank name must be at least 3 characters")
     .max(50, "Bank name cannot exceed 50 characters"),
-  ifscCode: z
-    .string()
-    .length(11, "IFSC code must be exactly 11 characters")
-    .regex(/^[A-Z]{4}0[A-Z0-9]{6}$/, "Invalid IFSC code format"),
+  ifscCode: z.string().min(5, "IFSC code must be greater than 5 characters"),
   cancelledCheque: z
     .any()
     .refine(
@@ -118,11 +109,13 @@ export const legalDetailsSchema = z.object({
         !file || ["image/jpeg", "image/jpg", "image/png"].includes(file.type),
       "Only .jpg, .jpeg, and .png formats are supported",
     )
-    .nullable(),
+    .nullable()
+    .optional(),
   uanNumber: z
     .string()
     .length(12, "UAN number must be exactly 12 digits")
-    .regex(/^\d{12}$/, "UAN number must contain only digits"),
+    .regex(/^\d{12}$/, "UAN number must contain only digits")
+    .optional(),
   uanCard: z
     .any()
     .refine(
@@ -139,15 +132,14 @@ export const legalDetailsSchema = z.object({
         !file || ["image/jpeg", "image/jpg", "image/png"].includes(file.type),
       "Only .jpg, .jpeg, and .png formats are supported",
     )
-    .nullable(),
+    .nullable()
+    .optional(),
 });
 
-// Work Experience Schema
-export const workExperienceSchema = z.object({
+export const workExperienceBaseSchema = z.object({
   experienceType: z.enum(["fresher", "experienced", "intern"], {
     required_error: "Please select experience type",
   }),
-
   resume: z
     .any()
     .refine(
@@ -164,9 +156,6 @@ export const workExperienceSchema = z.object({
       "Only PDF format is supported",
     )
     .nullable(),
-
-  // hasExperience: z.boolean().default(false),
-
   relievingLetter: z
     .any()
     .refine(
@@ -184,34 +173,10 @@ export const workExperienceSchema = z.object({
     )
     .nullable()
     .optional(),
-  // .superRefine((val, ctx) => {
-  //   if (ctx.parent.experienceType === "experienced" && !val) {
-  //     ctx.addIssue({
-  //       code: z.ZodIssueCode.custom,
-  //       message: "Relieving letter is required for experienced candidates",
-  //     });
-  //   }
-  // })
-  noticePeriod: z
-    .number()
-    .min(0, "Notice period cannot be negative")
-    .max(180, "Notice period cannot exceed 180 days")
-    .optional(),
-
-  role: z
-    .string()
-    .min(2, "Role must be at least 2 characters")
-    .max(50, "Role cannot exceed 50 characters")
-    .optional(),
-
-  experienceSummary: z
-    .string()
-    .min(10, "Experience summary must be at least 10 characters")
-    .max(1000, "Experience summary cannot exceed 1000 characters")
-    .optional(),
-
-  // Reference
-  hasReference: z.boolean().default(false),
+  noticePeriod: z.number().optional(),
+  role: z.string().optional(),
+  experienceSummary: z.string().optional(),
+  hasReference: z.boolean().default(false).optional(),
 
   referenceName: z
     .string()
@@ -242,9 +207,68 @@ export const workExperienceSchema = z.object({
     .optional(),
 });
 
-// Combined Onboarding Schema
+export const workExperienceSchema = workExperienceBaseSchema.superRefine(
+  (data, ctx) => {
+    if (data.experienceType === "experienced") {
+      if (
+        !data.experienceSummary ||
+        data.experienceSummary.trim().length < 10
+      ) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            "Experience summary is required and must be at least 10 characters",
+          path: ["experienceSummary"],
+        });
+      }
+
+      if (!data.role || data.role.trim().length < 2) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Role is required and must be at least 2 characters",
+          path: ["role"],
+        });
+      }
+
+      if (data.noticePeriod === undefined || data.noticePeriod < 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Notice period is required and cannot be negative",
+          path: ["noticePeriod"],
+        });
+      }
+
+      if (!data.relievingLetter) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Relieving letter is required for experienced candidates",
+          path: ["relievingLetter"],
+        });
+      }
+    }
+
+    if (data.hasReference === true) {
+      if (!data.referenceName || data.referenceName.trim().length < 2) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Reference name is required when has reference is checked",
+          path: ["referenceName"],
+        });
+      }
+
+      if (!data.referenceLetter) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Reference letter is required when has reference is checked",
+          path: ["referenceLetter"],
+        });
+      }
+    }
+  },
+);
+
 export const onboardingSchema = z.object({
   ...personalInfoSchema.shape,
   ...legalDetailsSchema.shape,
-  ...workExperienceSchema.shape,
+  ...workExperienceBaseSchema.shape,
 });

@@ -1,5 +1,5 @@
-"use client";
-import { Button } from "@/components/ui/button";
+"use client"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -7,10 +7,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import type { StepComponentProps } from "@/components/multi-step-form/types";
-import { Input } from "@/components/ui/customInput";
-import { legalDetailsSchema } from "@/types/onboarding.types";
+} from "@/components/ui/form"
+import type { StepComponentProps } from "@/components/multi-step-form/types"
+import { Input } from "@/components/ui/customInput"
+import { legalDetailsSchema } from "@/types/onboarding.types"
 
 export function LegalDetailsForm({
   form,
@@ -18,6 +18,8 @@ export function LegalDetailsForm({
   onPrevious,
   isLastStep,
 }: StepComponentProps<typeof legalDetailsSchema>) {
+  // console.log(form.getValues(), form.formState.errors);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onNext)} className="space-y-4">
@@ -69,11 +71,13 @@ export function LegalDetailsForm({
                 label="Upload Cancelled Cheque"
                 type="file"
                 accept=".png,.jpg,.jpeg"
-                {...form.register("cancelledCheque")}
                 error={form.formState.errors.cancelledCheque?.message}
                 onChange={(e) => {
-                  const file = e.target.files?.[0] || null;
-                  form.setValue("cancelledCheque", file);
+                  const file = e.target.files?.[0] || null
+                  if (!file) return
+                  form.setValue("cancelledCheque", file, {
+                    shouldValidate: true,
+                  })
                 }}
               />
             </div>
@@ -93,11 +97,11 @@ export function LegalDetailsForm({
                 label="Upload UAN Card"
                 type="file"
                 accept=".png,.jpg,.jpeg"
-                {...form.register("uanCard")}
                 error={form.formState.errors.uanCard?.message}
                 onChange={(e) => {
-                  const file = e.target.files?.[0] || null;
-                  form.setValue("uanCard", file);
+                  const file = e.target.files?.[0] || null
+                  if (!file) return
+                  form.setValue("uanCard", file)
                 }}
               />
             </div>
@@ -105,5 +109,5 @@ export function LegalDetailsForm({
         </div>
       </form>
     </Form>
-  );
+  )
 }

@@ -88,14 +88,14 @@ export function StepOne({
             />
 
             <div className="space-y-2">
-              <label className="text-[14px] capitalize font-medium text-gray-700">
+              <label className="text-[14px] capitalize font-medium text-gray-700 !mb-2">
                 Title
               </label>
               <Select
                 onValueChange={(value) => form.setValue("title", value)}
                 value={form.watch("title")}
               >
-                <SelectTrigger>
+                <SelectTrigger className="mb-0 mt-1 h-12">
                   <SelectValue placeholder="Select title" />
                 </SelectTrigger>
                 <SelectContent>
@@ -133,7 +133,7 @@ export function StepOne({
             </label>
             <Textarea
               placeholder="Enter company's full address"
-              className="min-h-[100px]"
+              className="min-h-[100px] mt-1"
               {...form.register("fullAddress")}
             />
             <ErrorLabel>

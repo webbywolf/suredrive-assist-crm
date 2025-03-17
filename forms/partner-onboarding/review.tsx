@@ -102,7 +102,7 @@ export function ReviewForm({
           />
           <LabelAndValue label="Bank Name" value={formData.bankName} />
           <LabelAndValue label="Branch Name" value={formData.branchName} />
-          <LabelAndValue label="Branch Code" value={formData.branchCode} />
+          {/* <LabelAndValue label="Branch Code" value={formData.branchCode} /> */}
           <LabelAndValue label="IFSC Code" value={formData.ifscCode} />
         </div>
       </div>
