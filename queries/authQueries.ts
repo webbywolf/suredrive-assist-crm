@@ -28,22 +28,24 @@ export const useFetchEmployee = () => {
 export const useLoginMutation = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: ({ employee_id, password }: { employee_id: string; password: string }) =>
       loginEmployee(employee_id, password),
     onSuccess: (data) => {
-      // Validate response using Zod
       AuthResponseSchema.parse({ success: true, message: "Validated", data });
-    if(data){
-      // redirect to dashboard
-      router.push("/dashboard");
-        useAuthStore.getState().setAuth(data.employee, data.roles, data.permissions); 
-        queryClient.invalidateQueries({ queryKey: ["authEmployee"] }); 
-    }
+
+      if (data) {
+        useAuthStore.getState().setAuth(data.employee, data.roles, data.permissions);
+        router.replace("/dashboard");
+        setTimeout(() => {
+          queryClient.invalidateQueries({ queryKey: ["authEmployee"] });
+        }, 500);
+      }
     },
   });
 };
+
 
 // Logout Mutation
 export const useLogoutMutation = () => {

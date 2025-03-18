@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <main className="relative w-full h-dvh py-4 container mx-auto flex flex-col">
+    <main className="relative w-full h-dvh py-4 container mx-auto flex flex-col px-6">
       <div
         className="absolute top-0 w-[370px] h-[490px] md:left-[500px] blur-[140px] md:rotate-[14deg] bg-no-repeat bg-cover bg-center"
         style={{
@@ -22,7 +22,7 @@ const page = () => {
         }}
       ></div>
 
-      <div className="flex items-center justify-center md:justify-start gap-2 py-4">
+      <div className="absolute top-6 left-6 md:left-0 flex items-center justify-center md:justify-start gap-2 py-4">
         <img loading="lazy" src="/assets/images/logo.svg" width={200} alt="logo" />
       </div>
       <div className="flex-1 flex flex-col items-center justify-center">
@@ -32,12 +32,6 @@ const page = () => {
         </div>
         <Form />
       </div>
-      {/* <footer className="text-slate-600 text-xs md:text-sm border-t border-border flex flex-col items-center md:flex-row gap-1 justify-between py-4">
-        <p>© 2025 SureDrive Assistant. All rights reserved.</p>
-        <p className="inline-flex items-center gap-2">
-          Made with <Heart size={16} /> By WebbyWolf
-        </p>
-      </footer> */}
     </main>
   )
 }

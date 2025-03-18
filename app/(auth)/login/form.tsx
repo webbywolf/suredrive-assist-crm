@@ -21,7 +21,7 @@ const Form = () => {
   }
   
   return (
-    <div className="text-left bg-[#ffffff] w-full px-8 md:p-8 md:w-[400px] mx-auto rounded-lg z-10 border border-gray-200">
+    <div className="text-left bg-[#ffffff] w-full px-8 md:py-10 w-[340px] md:w-[400px] py-4 mx-auto rounded-lg z-10 border border-gray-200">
       <form className="flex flex-col gap-2" onSubmit={(e) => {
         e.preventDefault();
         loginMutation.mutate(form);

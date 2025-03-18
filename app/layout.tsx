@@ -4,8 +4,6 @@ import "./globals.css"
 import TanstackProvider from "@/context/TanstackProvider"
 
 
-
-
 const openSans = Open_Sans({
   variable: "--font-open-sans",
   subsets: ["latin"],
@@ -30,12 +28,10 @@ export default function RootLayout({
       <body
         className={`${openSans.className} text-gray-800 antialiased overflow-hidden`}
         suppressHydrationWarning={true}
-      >
-            
+      >            
       <TanstackProvider>
         {children}
-        </TanstackProvider>
-        
+      </TanstackProvider> 
       </body>
     </html>
   )
