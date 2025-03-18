@@ -10,11 +10,10 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu"
 import { Bell } from "lucide-react"
-import { useFetchEmployee } from "@/queries/authQueries";
 import { Skeleton } from "@/components/ui/skeleton";
+import useEmployee from "@/hooks/useEmployee"
 const Header = ({ title }: { title?: string }) => {
-  const { data, error, isLoading } = useFetchEmployee();
-  
+  const { employee: data, isLoading: employeeLoading } = useEmployee();
 
   return (
     <header className="w-full h-full bg-gray-100 flex items-center border-b border-border px-6 py-2">
@@ -44,7 +43,7 @@ const Header = ({ title }: { title?: string }) => {
 
           <div className="flex justify-center items-center cursor-pointer px-3 h-full border border-gray-200 bg-white gap-2 rounded-md">
             <div className="flex flex-col">
-              {isLoading ? <Skeleton className="w-[90px] h-[20px] bg-gray-200 rounded-md" />: <p className="text-[12px] text-gray-600 font-medium">{data?.employee.name}</p>}
+              {employeeLoading ? <Skeleton className="w-[90px] h-[20px] bg-gray-200 rounded-md" />: <p className="text-[12px] text-gray-600 font-medium">{data?.employee.name}</p>}
               <span className="text-[9px] text-gray-500 text-right inline-block">ID: {data?.employee.employee_id}</span>
               
             </div>

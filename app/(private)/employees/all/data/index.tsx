@@ -1,15 +1,15 @@
-import React from "react";
-import { columns } from "./columns";
-import { DataTable } from "@/components/table/DataTable";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import React from "react"
+import { columns } from "./columns"
+import { DataTable } from "@/components/table/DataTable"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 export type Employee = {
-  employee_id: string;
-  name: string;
-  status: "Pending" | "Active" | "Rejected";
-  role: string;
-  created_by: string;
-};
+  employee_id: string
+  name: string
+  status: "Pending" | "Active" | "Rejected"
+  role: string
+  created_by: string
+}
 const data: Employee[] = [
   {
     employee_id: "SDA-001",
@@ -81,21 +81,7 @@ const data: Employee[] = [
     status: "Active",
     created_by: "24/02/2025",
   },
-  {
-    employee_id: "SDA-013",
-    name: "Jasprit Singh",
-    role: "Front-End",
-    status: "Active",
-    created_by: "24/02/2025",
-  },
-  {
-    employee_id: "SDA-013",
-    name: "Jasprit Singh",
-    role: "Front-End",
-    status: "Active",
-    created_by: "24/02/2025",
-  },
-];
+]
 
 export default function ExistingUsers() {
   return (
@@ -106,13 +92,13 @@ export default function ExistingUsers() {
       addButton={<AddButton />}
       paginationOption
     />
-  );
+  )
 }
 
 const AddButton = () => {
   return (
     <Button variant="outline" size="lg" className="text-slate-600">
-      <Link href={"/employees/onboarding"}>Add New</Link>
+      <Link href={"/users/add-new"}>Add New</Link>
     </Button>
-  );
-};
+  )
+}

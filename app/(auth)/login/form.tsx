@@ -5,33 +5,34 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/customInput"
 import { Loader2 } from "lucide-react"
-import { useAuth } from "@/hooks/useAuth"
 
 const Form = () => {
-  const { loginMutation } = useAuth();
+  const router = useRouter()
   const [form, setForm] = useState({
-    employee_id: "",
+    username: "",
     password: "",
   })
-  
-
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const handleUpdateChange = (e: any) => {
+    e.preventDefault()
     setForm({ ...form, [e.target.name]: e.target.value.trim() })
   }
-  
+  console.log(form)
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+  }
   return (
     <div className="text-left bg-[#ffffff] w-full px-8 md:p-8 md:w-[400px] mx-auto rounded-lg z-10 border border-gray-200">
-      <form className="flex flex-col gap-2" onSubmit={(e) => {
-        e.preventDefault();
-        loginMutation.mutate(form);
-      }}>
+      <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
         <Input
-          label="Employee Id"
-          name="employee_id"
+          label="Username"
+          name="username"
           type="text"
-          value={form.employee_id}
-          placeholder="Enter your employee id"
+          value={form.username}
+          placeholder="Enter your username"
           onChange={handleUpdateChange}
           required
         />
@@ -45,17 +46,15 @@ const Form = () => {
           required
         />
         <Button type="submit" className="w-full mt-4 h-12 " variant="brand">
-          {loginMutation.isPending ? (
+          {loading ? (
             <div className="animate-spin">
               <Loader2 size={18} color="white" />
             </div>
           ) : (
             "Sign In"
           )}
-          
         </Button>
       </form>
-      <span className="text-xs text-red-600">{loginMutation.error?.message}</span>
     </div>
   )
 }

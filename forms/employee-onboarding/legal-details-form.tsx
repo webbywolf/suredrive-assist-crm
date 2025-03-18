@@ -18,8 +18,6 @@ export function LegalDetailsForm({
   onPrevious,
   isLastStep,
 }: StepComponentProps<typeof legalDetailsSchema>) {
-  // console.log(form.getValues(), form.formState.errors);
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onNext)} className="space-y-4">
@@ -28,13 +26,13 @@ export function LegalDetailsForm({
             label="Pan Number"
             placeholder="Enter Pan number"
             {...form.register("pan")}
-            error={form.formState.errors.pan?.message}
+            className={form.formState.errors.pan ? "border-red-500" : ""}
           />
           <Input
             label="Aadhaar Number"
             placeholder="Enter Aadhaar number"
-            {...form.register("aadharNumber")}
-            error={form.formState.errors.aadharNumber?.message}
+            // {...form.register("aadhar")}
+            // className={form.formState.errors.aadhar ? "border-red-500" : ""}
           />
         </div>
         <div>
@@ -43,8 +41,8 @@ export function LegalDetailsForm({
             <Input
               label="Account Holder Name"
               placeholder="Enter Account Holder Name"
-              {...form.register("accountHolderName")}
-              error={form.formState.errors.accountHolderName?.message}
+              // {...form.register("accountHolderName")}
+              // className={form.formState.errors.accountHolderName ? "border-red-500" : ""}
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -52,35 +50,30 @@ export function LegalDetailsForm({
               label="Account Number"
               placeholder="Enter Account number"
               {...form.register("accountNumber")}
-              error={form.formState.errors.accountNumber?.message}
+              className={form.formState.errors.accountNumber ? "border-red-500" : ""}
             />
             <Input
               label="Bank Name"
               placeholder="Enter Bank Name"
-              {...form.register("bankName")}
-              error={form.formState.errors.bankName?.message}
+              // {...form.register("bankName")}
+              // className={form.formState.errors.bankName ? "border-red-500" : ""}
             />
             <Input
               label="IFSC Code"
               placeholder="Enter IFSC Code"
-              {...form.register("ifscCode")}
-              error={form.formState.errors.ifscCode?.message}
+              // {...form.register("ifscCode")}
+              // className={form.formState.errors.ifscCode ? "border-red-500" : ""}
             />
-            <div>
-              <Input
-                label="Upload Cancelled Cheque"
-                type="file"
-                accept=".png,.jpg,.jpeg"
-                error={form.formState.errors.cancelledCheque?.message}
-                onChange={(e) => {
-                  const file = e.target.files?.[0] || null
-                  if (!file) return
-                  form.setValue("cancelledCheque", file, {
-                    shouldValidate: true,
-                  })
-                }}
-              />
-            </div>
+            <Input
+              label="Upload Cancelled Cheque"
+              type="file"
+              accept=".png,.jpg,.jpeg"
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                // form.setValue("cancelledCheque", file ? file.name : "")
+              }}
+              // className={form.formState.errors.cancelledCheque ? "border-red-500" : ""}
+            />
           </div>
         </div>
         <div>
@@ -89,22 +82,19 @@ export function LegalDetailsForm({
             <Input
               label="UAN Number"
               placeholder="Enter UAN number"
-              {...form.register("uanNumber")}
-              error={form.formState.errors.uanNumber?.message}
+              // {...form.register("uanNumber")}
+              // className={form.formState.errors.uanNumber ? "border-red-500" : ""}
             />
-            <div>
-              <Input
-                label="Upload UAN Card"
-                type="file"
-                accept=".png,.jpg,.jpeg"
-                error={form.formState.errors.uanCard?.message}
-                onChange={(e) => {
-                  const file = e.target.files?.[0] || null
-                  if (!file) return
-                  form.setValue("uanCard", file)
-                }}
-              />
-            </div>
+            <Input
+              label="Upload UAN Card"
+              type="file"
+              accept=".png,.jpg,.jpeg"
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                // form.setValue("uanCard", file ? file.name : "")
+              }}
+              // className={form.formState.errors.uanCard ? "border-red-500" : ""}
+            />
           </div>
         </div>
       </form>
