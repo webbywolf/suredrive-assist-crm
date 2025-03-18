@@ -1,27 +1,12 @@
 "use client";
 import React from "react";
-import { DataTable } from "@/components/table/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  Delete,
-  Edit,
-  EllipsisVertical,
-  Pencil,
-  Trash2,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Trash2, Pencil } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
+import { Department } from "../departments";
 
-export type User = {
-  id: string;
-  name: string;
-  department: string;
-  status: string;
-};
-
-export const columns: ColumnDef<User>[] = [
+export const columns: ColumnDef<Department>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -45,47 +30,44 @@ export const columns: ColumnDef<User>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "id",
-    header: () => <div className=" uppercase">employee id</div>,
-    cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
+    accessorKey: "index",
+    header: () => <div className="uppercase">No.</div>,
+    cell: ({ row }) => <div>{row.index + 1}</div>,
   },
   {
     accessorKey: "name",
-    header: () => <div className=" uppercase">name</div>,
-    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
-  },
-  {
-    accessorKey: "department",
-    header: () => <div className=" uppercase">Department</div>,
+    header: () => <div className="uppercase">Department Name</div>,
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("department")}</div>
-    ),
-  },
-  {
-    accessorKey: "status",
-    header: () => <div className=" uppercase">status</div>,
-    cell: ({ row }) => (
-      <div
-        className={cn(
-          "capitalize border border-gray-300 bg-white rounded-full w-20 text-center p-1.5 text-[12px] ",
-          { "bg-green-700 text-white": row.getValue("status") === "Active" },
-          { "bg-amber-500 text-white": row.getValue("status") !== "Active" },
-        )}
-      >
-        {row.getValue("status")}
+      <div className="capitalize">
+        {(row.getValue("name") as string).replace(/_/g, " ")}
       </div>
     ),
   },
-
+  {
+    accessorKey: "description",
+    header: () => <div className="uppercase">Description</div>,
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("description")}</div>
+    ),
+  },
+  {
+    accessorKey: "created_by",
+    header: () => <div className="uppercase">Created By</div>,
+    cell: ({ row }) => {
+      const createdBy = row.original.created_by;
+      return (
+        <div className="capitalize">{`${createdBy.first_name} ${createdBy.last_name}`}</div>
+      );
+    },
+  },
   {
     id: "actions",
-    header: () => <div className="text-right uppercase pr-6">Actions</div>,
+    header: () => <div className="pr-6 text-right uppercase">Actions</div>,
     cell: ({ row }) => {
-      // console.log(row.getValue("id"));
       return (
-        <div className="flex gap-2 justify-end pr-3">
+        <div className="flex justify-end gap-2 pr-3">
           <div className="flex gap-2">
-            <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
+            <button className="div-center size-8 cursor-pointer rounded-full p-1 text-slate-800 hover:bg-gray-200">
               <Trash2 size={20} />
             </button>
             {/* <UserPermission

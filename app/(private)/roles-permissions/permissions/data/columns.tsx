@@ -1,16 +1,11 @@
 "use client";
 import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Edit2, Trash2 } from "lucide-react";
+import { ArrowUpDown, Edit2, Trash2 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { Permission } from "@/types/schemas/permissionSchema";
 import { EditPermission } from "./data";
-
-export type Permission = {
-  name: string;
-  assigned_to: string[];
-  created_date: string;
-};
 
 export const columns: ColumnDef<Permission>[] = [
   {
@@ -23,6 +18,7 @@ export const columns: ColumnDef<Permission>[] = [
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
+        className="translate-y-[2px]"
       />
     ),
     cell: ({ row }) => (
@@ -30,6 +26,7 @@ export const columns: ColumnDef<Permission>[] = [
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Select row"
+        className="translate-y-[2px]"
       />
     ),
     enableSorting: false,
@@ -37,42 +34,69 @@ export const columns: ColumnDef<Permission>[] = [
   },
   {
     accessorKey: "name",
-    header: () => <div className=" uppercase">name</div>,
-    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const value = row.getValue("name") as string;
+      return <div className="font-medium">{value}</div>;
+    },
   },
   {
-    accessorKey: "assigned_to",
-    header: () => <div className=" uppercase">Assigned To</div>,
-    cell: ({ row }) => (
-      <div className="capitalize flex gap-1">
-        {(row.getValue("assigned_to") as string[]).map((per: string) => (
-          <Button key={per} variant="outline">
-            {per}
-          </Button>
-        ))}
-      </div>
-    ),
+    accessorKey: "description",
+    header: "Description",
+    cell: ({ row }) => {
+      const value = row.getValue("description") as string;
+      return <div>{value}</div>;
+    },
   },
   {
-    accessorKey: "created_date",
-    header: () => <div className=" uppercase"> Created At</div>,
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("created_date")}</div>
-    ),
+    accessorKey: "category",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Category
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const value = row.getValue("category") as string;
+      return <span className="border-border border bg-slate-100">{value}</span>;
+    },
+  },
+  {
+    accessorKey: "created_by",
+    header: "Created By",
+    cell: ({ row }) => {
+      const createdBy = row.original.created_by;
+      return <div>{`${createdBy.first_name} ${createdBy.last_name}`}</div>;
+    },
   },
   {
     id: "actions",
-    header: () => <div className="text-right uppercase pr-6">Actions</div>,
-    cell: () => {
+    header: () => <div className="pr-6 text-right uppercase">Actions</div>,
+    cell: ({ row }) => {
       return (
-        <div className="flex gap-2 justify-end pr-3">
+        <div className="flex justify-end gap-2 pr-3">
           <div className="flex gap-2">
-            <EditPermission>
-              <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
-                <Edit2 size={20} />
-              </button>
-            </EditPermission>
-            <button className="p-1 size-8 div-center cursor-pointer rounded-full hover:bg-gray-200 text-slate-800">
+            {/* <EditPermission permission={row.original}> */}
+            <button className="div-center size-8 cursor-pointer rounded-full p-1 text-slate-800 hover:bg-gray-200">
+              <Edit2 size={20} />
+            </button>
+            {/* </EditPermission> */}
+            <button className="div-center size-8 cursor-pointer rounded-full p-1 text-slate-800 hover:bg-gray-200">
               <Trash2 size={20} />
             </button>
           </div>

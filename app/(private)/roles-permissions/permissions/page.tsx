@@ -4,8 +4,8 @@ import { Metadata } from "next";
 import AllPermissionsTable from "./data/data";
 
 export const metadata: Metadata = {
-  title: "Permissions",
-  description: "Permissions",
+  title: "Permissions Management",
+  description: "Manage system permissions",
 };
 
 const page = () => {

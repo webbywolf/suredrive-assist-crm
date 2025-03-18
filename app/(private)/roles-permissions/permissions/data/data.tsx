@@ -1,19 +1,33 @@
 "use client";
-import React from "react";
-import { DataTable } from "@/components/table/DataTable";
-import { ColumnDef } from "@tanstack/react-table";
+
+import React, { useState } from "react";
 import {
-  ArrowUpDown,
-  Delete,
-  Edit,
-  EllipsisVertical,
-  Pencil,
-  Plus,
-  Trash2,
-} from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
-import { cn } from "@/lib/utils";
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+  SortingState,
+  getSortedRowModel,
+  ColumnFiltersState,
+  getFilteredRowModel,
+} from "@tanstack/react-table";
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+
+import {
+  Permission,
+  permissionFormSchema,
+} from "@/types/schemas/permissionSchema";
+import { columns } from "./columns";
 import {
   Dialog,
   DialogClose,
@@ -24,63 +38,31 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { columns, Permission } from "./columns";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  useCreatePermission,
+  useGetAllPermissions,
+  useUpdatePermission,
+} from "@/queries/permissionQueries";
+import { Plus, Trash2 } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { DataTable } from "@/components/table/DataTable";
+import { Input } from "@/components/ui/customInput";
 
-const tableData: Permission[] = [
-  {
-    name: "Management",
-    assigned_to: ["Administrator"],
-    created_date: "14 Apr 2021, 8:43 PM",
-  },
-  {
-    name: "Manage Billing & Roles",
-    assigned_to: ["Administrator"],
-    created_date: "16 Sep 2021, 5:20 PM",
-  },
-  {
-    name: "Add & Remove Users",
-    assigned_to: ["Administrator", "Manager"],
-    created_date: "14 Oct 2021, 10:20 AM",
-  },
-  {
-    name: "Project Planning",
-    assigned_to: ["Administrator", "Users", "Support"],
-    created_date: "14 May 2021, 12:10 PM",
-  },
-  {
-    name: "Manage Email Sequences",
-    assigned_to: ["Administrator", "Users", "Support"],
-    created_date: "23 Aug 2021, 2:00 PM",
-  },
-  {
-    name: "Client Communication",
-    assigned_to: ["Administrator", "Manager"],
-    created_date: "15 Apr 2021, 11:30 AM",
-  },
-  {
-    name: "Only View",
-    assigned_to: ["Administrator", "Restricted User"],
-    created_date: "04 Dec 2021, 8:15 PM",
-  },
-  {
-    name: "Financial Management",
-    assigned_to: ["Administrator", "Manager"],
-    created_date: "25 Feb 2021, 10:30 AM",
-  },
-  {
-    name: "Manage Others' Tasks",
-    assigned_to: ["Administrator", "Support"],
-    created_date: "04 Nov 2021, 11:45 AM",
-  },
-];
+interface PermissionsTableProps {
+  data: Permission[];
+}
 
-export default function AllPermissionsTable() {
+export default function PermissionsTable() {
+  const { data, isLoading } = useGetAllPermissions();
+  console.log(data, isLoading);
   return (
     <DataTable
       columns={columns}
-      data={tableData}
-      filterOptions={{ label: "Role Name", value: "name" }}
+      data={data || []}
+      filterOptions={{ label: "Permission Name", value: "name" }}
       addButton={<AddPermission />}
       paginationOption
     />
@@ -88,96 +70,236 @@ export default function AllPermissionsTable() {
 }
 
 export function AddPermission() {
+  const createPermission = useCreatePermission();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    getValues,
+  } = useForm({
+    resolver: zodResolver(permissionFormSchema),
+    defaultValues: {
+      name: "",
+      description: "",
+      category: "",
+    },
+  });
+
+  console.log(getValues());
+
+  const onSubmit = async (data: z.infer<typeof permissionFormSchema>) => {
+    try {
+      await createPermission.mutateAsync({
+        name: data.name,
+        description: data.description,
+        category: data.category,
+      });
+      console.log("created successfuly");
+      reset();
+    } catch (error) {
+      console.error("Failed to create permission:", error);
+    }
+  };
+
   return (
     <Dialog>
-      <DialogTrigger asChild>
+      <DialogTrigger>
         <Button variant="outline" className="h-10.5">
-          <Plus /> Add Permission
+          <Plus className="mr-2 h-4 w-4" /> Add Permission
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Add New Permission</DialogTitle>
-          <DialogDescription>
-            Permissions you may use and assign to your users.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="space-y-4 pb-5">
-          <div className="">
-            <Input
-              label="Permission Name"
-              id="permissionName"
-              className="col-span-3"
-            />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogHeader>
+            <DialogTitle>Add New Permission</DialogTitle>
+            <DialogDescription>
+              Permissions you may use and assign to your users.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 pt-4 pb-5">
+            <div className="space-y-2">
+              <Input
+                id="name"
+                label="Permission Name"
+                placeholder="Enter permission name"
+                {...register("name")}
+                error={errors.name?.message}
+              />
+              {errors.name && (
+                <p className="text-xs text-red-500">{errors.name.message}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Input
+                id="description"
+                label="Description"
+                placeholder="Describe the permission"
+                {...register("description")}
+              />
+              {errors.description && (
+                <p className="text-xs text-red-500">
+                  {errors.description.message}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Input
+                id="category"
+                label="Category"
+                placeholder="E.g. Employee Management"
+                {...register("category")}
+              />
+              {errors.category && (
+                <p className="text-xs text-red-500">
+                  {errors.category.message}
+                </p>
+              )}
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox id="terms" />
-            <label
-              htmlFor="terms"
-              className="text-sm cursor-pointer font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          <DialogFooter className="gap-5">
+            <Button
+              type="submit"
+              variant="brand"
+              disabled={createPermission.isPending}
             >
-              Set as core permission
-            </label>
-          </div>
-        </div>
-        <DialogFooter className="gap-5">
-          <Button type="submit" variant="brand">
-            Create Permission
-          </Button>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DialogClose>
-        </DialogFooter>
+              {createPermission.isPending ? "Creating..." : "Create Permission"}
+            </Button>
+            <DialogClose asChild>
+              <Button variant="outline" type="button">
+                Cancel
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );
 }
 
-export const EditPermission = ({ children }: { children: React.ReactNode }) => {
+export function EditPermission({
+  children,
+  permission,
+}: {
+  children: React.ReactNode;
+  permission: Permission;
+}) {
+  const updatePermission = useUpdatePermission();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(permissionFormSchema),
+    defaultValues: {
+      name: permission.name,
+      description: permission.description,
+      category: permission.category,
+    },
+  });
+
+  const onSubmit = async (data: z.infer<typeof permissionFormSchema>) => {
+    try {
+      await updatePermission.mutateAsync({
+        id: permission.id,
+        data: {
+          name: data.name,
+          description: data.description,
+          category: data.category,
+        },
+      });
+      // toast({
+      //   title: "Permission updated",
+      //   description: "Your permission has been updated successfully",
+      // });
+    } catch (error) {
+      // toast({
+      //   title: "Error",
+      //   description: "Failed to update permission",
+      //   variant: "destructive",
+      // });
+    }
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit Permission</DialogTitle>
-          <DialogDescription>
-            Edit permission as per your requirements.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="space-y-4">
-          <div className="text-sm bg-yellow-200 text-yellow-800 font-medium w-full p-3  rounded-md">
-            <p>Warning </p>
-            <p>
-              By editing the permission name, you might break the system
-              permissions functionality. Please ensure you're absolutely certain
-              before proceeding.
-            </p>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogHeader>
+            <DialogTitle>Edit Permission</DialogTitle>
+            <DialogDescription>
+              Edit permission as per your requirements.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="w-full rounded-md bg-yellow-200 p-3 text-sm font-medium text-yellow-800">
+              <p>Warning </p>
+              <p>
+                By editing the permission name, you might break the system
+                permissions functionality. Please ensure you're absolutely
+                certain before proceeding.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Input
+                id="name"
+                label="Permission Name"
+                placeholder="Enter permission name"
+                {...register("name")}
+              />
+              {errors.name && (
+                <p className="text-xs text-red-500">{errors.name.message}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Input
+                id="description"
+                label="Description"
+                placeholder="Describe the permission"
+                {...register("description")}
+              />
+              {errors.description && (
+                <p className="text-xs text-red-500">
+                  {errors.description.message}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Input
+                id="category"
+                label="Category"
+                placeholder="E.g. Employee Management"
+                {...register("category")}
+              />
+              {errors.category && (
+                <p className="text-xs text-red-500">
+                  {errors.category.message}
+                </p>
+              )}
+            </div>
           </div>
-          <Input
-            label="Permission Name"
-            required
-            id="permissionName"
-            className="col-span-3"
-          />
-          <div className="flex items-center space-x-2">
-            <Checkbox id="terms" />
-            <label
-              htmlFor="terms"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          <DialogFooter className="gap-5">
+            <Button
+              type="submit"
+              variant="brand"
+              disabled={updatePermission.isPending}
             >
-              Set as core permission
-            </label>
-          </div>
-        </div>
-        <DialogFooter className="gap-5">
-          <Button type="submit" variant="brand">
-            Update
-          </Button>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DialogClose>
-        </DialogFooter>
+              {updatePermission.isPending ? "Updating..." : "Update"}
+            </Button>
+            <DialogClose asChild>
+              <Button variant="outline" type="button">
+                Cancel
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );
-};
+}
