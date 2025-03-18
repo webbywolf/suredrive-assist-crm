@@ -26,7 +26,7 @@ export const PersonalInfoTab = () => {
         <DatePicker
           label="Date of Birth"
           name="dob"
-          defaulValue={new Date()}
+          defaultValue={new Date()}
           disabled
         />
       </div>

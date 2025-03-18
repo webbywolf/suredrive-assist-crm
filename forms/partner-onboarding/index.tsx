@@ -17,9 +17,7 @@ import {
   companyRegistrationSchema,
 } from "@/types/partner.types";
 import { useMultiStepFormStore } from "@/store/multiform";
-import { Form } from "react-hook-form";
 import { ReviewForm } from "./review";
-import { Steps } from "antd";
 
 const steps = [
   {

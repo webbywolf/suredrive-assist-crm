@@ -34,12 +34,13 @@ export function PersonalInformationForm({
 
   // console.log("Form Values:", getValues());
   // console.log("Form Errors:", errors);
-
-  const handleDateChange = (date: Dayjs | null) => {
+  
+  const handleDateChange = (date: Date | undefined) => {
     if (date) {
-      setValue("dateOfBirth", date.toDate());
+      setValue("dateOfBirth", date);
+      trigger("dateOfBirth");
     }
-  };
+  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -84,9 +85,7 @@ export function PersonalInformationForm({
               <DatePicker
                 name="dateOfBirth"
                 label="Date of Birth"
-                value={
-                  watch("dateOfBirth") ? dayjs(watch("dateOfBirth")) : null
-                }
+                defaultValue={watch("dateOfBirth") ? dayjs(watch("dateOfBirth")).toDate() : new Date() }
                 onChange={handleDateChange}
               />
 

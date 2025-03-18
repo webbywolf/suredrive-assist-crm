@@ -1,6 +1,6 @@
 import Page from "@/components/layouts/Page";
 import { Metadata } from "next";
-import { Profile } from "./tabs/profile";
+// import { Profile } from "./tabs/profile";
 
 export const metadata: Metadata = {
   title: "Profile",
@@ -9,7 +9,8 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <Page title="Profile">
-      <Profile />
+      {/* <Profile /> */}
+      <h1>Profile Page</h1>
     </Page>
   );
 }

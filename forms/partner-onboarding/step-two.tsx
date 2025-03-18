@@ -11,11 +11,18 @@ export function StepTwo({
   onPrevious,
   isLastStep,
 }: StepComponentProps<any>) {
-  const handleDateChange = (date: Dayjs | null) => {
+  // const handleDateChange = (date: Dayjs | null) => {
+  //   if (date) {
+  //     form.setValue("incorporationDate", date.toDate());
+  //   }
+  // };
+
+  const handleDateChange = (date: Date | undefined) => {
     if (date) {
-      form.setValue("incorporationDate", date.toDate());
+      form.setValue("incorporationDate", date);
     }
-  };
+  }
+ 
   return (
     <div className="space-y-6">
       <Form {...form}>
@@ -48,15 +55,11 @@ export function StepTwo({
               <DatePicker
                 name="incorporationDate"
                 label=" Incorporation Date"
-                value={
-                  form.watch("incorporationDate")
-                    ? dayjs(form.watch("incorporationDate"))
-                    : null
-                }
+                defaultValue={form.watch("incorporationDate") ? dayjs(form.watch("incorporationDate")).toDate() : new Date() }
                 onChange={handleDateChange}
               />
               {form.formState.errors.incorporationDate && (
-                <ErrorLabel>
+                <ErrorLabel>  
                   {form.formState.errors.incorporationDate.message?.toString()}
                 </ErrorLabel>
               )}
